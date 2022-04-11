@@ -4,15 +4,12 @@
 #include "my_dll.h"
 int main()
 {
-    my_dll_P P =(my_dll_P)malloc(sizeof(struct my_dll));
-    assert(P!=NULL);
-    P->last=NULL;
-    P->root=NULL;
-    P->size =0;
+    my_dll_P P = createStruct();
     while(1)
     {
         char *s=(char*)malloc(sizeof(char)*20);
-        scanf("%s",&s);
+        scanf("%s",s);
+        printf("\nonce done\n");
         int x,i;
 
         if(strcmp(s,"insert")==0)
