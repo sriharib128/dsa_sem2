@@ -1,5 +1,15 @@
 #include "my_dll.h"
 
+my_dll_P createStruct()
+{
+    my_dll_P P =(my_dll_P)malloc(sizeof(struct my_dll));
+    assert(P!=NULL);
+    P->last=NULL;
+    P->root=NULL;
+    P->size =0;
+    return P;
+}
+
 void insert(my_dll_P P , int x)
 {
     NodePointer temp = (NodePointer)malloc(sizeof(Node));
@@ -42,6 +52,7 @@ void insert_at(my_dll_P P , int x , int i)
         NodePointer temporary = P->root;
         P->root = temp;
         temp->next = temporary;
+        temporary->prev = temp;
         temp->prev = NULL;
         P->size = P->size+1;
         return ;
@@ -80,16 +91,16 @@ void DELETE(my_dll_P P, int i)
     if(i==0)
     {
         NodePointer temporary = (P->root);
-        free(temporary);
         P->root = (P->root)->next;
         (P->root)->prev = NULL;
+        free(temporary);
     }
     else if(i== (P->size)-1)
     {
         NodePointer temporary = (P->last);
-        free(temporary);
         P->last = (P->last)->prev;
         (P->last)->next = NULL;
+        free(temporary);
     }
     else
     {
@@ -100,9 +111,9 @@ void DELETE(my_dll_P P, int i)
             {
                 NodePointer tempPrev = a->prev;
                 NodePointer tempNext = a->next;
-                free(a);
                 tempPrev->next = tempNext;
                 tempNext->prev = tempPrev;
+                free(a);
                 return;
             }
             ct++;
@@ -123,11 +134,33 @@ int find(my_dll_P P, int x)
 }
 void prune(my_dll_P P)
 {
-    for(int i=1;i<P->size;(i=i+2))
+    int i=0;
+    int ct=0;
+    for(NodePointer a = P->root;ct<(P->size);ct++)
     {
-        DELETE(P,i);
+        if(ct&1)
+        {   
+            if(a->next != NULL)
+            {
+                NodePointer tempPrev = a->prev;
+                NodePointer tempNext = a->next;
+                tempPrev->next = tempNext;
+                tempNext->prev = tempPrev;
+                free(a);
+                a = tempPrev;
+            }
+            else
+            {
+                NodePointer temporary = (P->last);
+                P->last = (P->last)->prev;
+                (P->last)->next = NULL;
+                free(temporary);
+            }
+        }
+        a = a->next;
     }
 }
+
 void print(my_dll_P P)
 {
     for(NodePointer a = P->root;; a=a->next)
@@ -146,7 +179,6 @@ void print_reverse(my_dll_P P)
     for(NodePointer a = P->last;; a=a->prev)
     {   
         printf("%d ",a->data);
-
         if(a->prev == NULL)
         {
             printf("\n");

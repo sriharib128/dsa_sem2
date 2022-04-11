@@ -12,6 +12,8 @@ struct my_dll
     NodePointer last;
     unsigned int size;
 };
+
+my_dll_P createStruct();
 void insert(my_dll_P P , int x);
 void insert_at(my_dll_P P , int x , int i);
 void DELETE(my_dll_P P, int i);

@@ -1,0 +1,22 @@
+insert 1
+insert 2
+insert 3
+insert 4
+insert_at 4 0
+insert_at 5 0 
+insert_at 6 0
+insert_at 7 0
+insert_at 8 0
+get_size
+print
+DELETE 1
+print
+DELETE 3
+print
+print_reverse
+get_size
+prune
+get_size
+print
+quit
+
