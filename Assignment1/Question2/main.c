@@ -1,0 +1,50 @@
+#include "complex.h"
+
+int main()
+{
+    while(1)
+    {
+        char *s=(char*)malloc(sizeof(char)*20);
+        scanf("%s",s);
+        printf("> done\n");
+        int dim;
+        scanf("%d",&dim);
+        if(strcmp(s,"ADD")==0)
+        {
+            complex a= input(dim);
+            complex b = input(dim);
+            print(add(a,b));
+        }
+        else if(strcmp(s,"SUB")==0)
+        {
+            complex a= input(dim);
+            complex b = input(dim);
+            print(sub(a,b));
+        }
+        else if(strcmp(s,"MOD")==0)
+        {
+            complex a= input(dim);
+            printf("%f\n",mod(a));
+        }
+        else if(strcmp(s,"DOT")==0)
+        {
+            complex a= input(dim);
+            complex b = input(dim);
+            printf("%f\n",dot(a,b));
+        }
+        else if(strcmp(s,"COS")==0)
+        {
+            complex a= input(dim);
+            complex b = input(dim);
+            printf("%f\n",cos(a,b));
+        }
+        else if (strcmp(s,"quit")==0)
+        {
+            break;
+        }
+        else
+        {
+            printf("Enter Valid Input\n");
+        }
+    }
+}

@@ -5,28 +5,21 @@
 #include <stdlib.h>
 #include <assert.h>
 
-typedef int dimensions;
 typedef struct _complex * complex;
 
 struct _complex
 {
-    dimensions t;//dimension
-    complex *head;
+    int t;//dimension
+    float *head;
 };
 
-//typedef struct linkedlist ll;
-typedef struct linkedlist * ll_p;
-
-struct  linkedlist
-{
-    double value;
-    ll_p* next;
-};
-
+void print(complex a);
+complex input(int d);
 complex add(complex a , complex b);
 complex sub(complex a , complex b);
-complex mod (complex a);
-complex dot(complex a,complex b);
-complex cos(complex a, complex b);
+float mod (complex a);
+float square_root(float sum);
+float dot(complex a,complex b);
+float cos(complex a, complex b);
 
 #endif
