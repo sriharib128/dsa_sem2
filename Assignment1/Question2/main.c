@@ -6,7 +6,7 @@ int main()
     {
         char *s=(char*)malloc(sizeof(char)*20);
         scanf("%s",s);
-        printf("> done\n");
+        //printf("> done\n");
         int dim;
         scanf("%d",&dim);
         if(strcmp(s,"ADD")==0)
@@ -24,19 +24,19 @@ int main()
         else if(strcmp(s,"MOD")==0)
         {
             complex a= input(dim);
-            printf("%f\n",mod(a));
+            printf("%.2f\n",mod(a));
         }
         else if(strcmp(s,"DOT")==0)
         {
             complex a= input(dim);
             complex b = input(dim);
-            printf("%f\n",dot(a,b));
+            printf("%.2f\n",dot(a,b));
         }
         else if(strcmp(s,"COS")==0)
         {
             complex a= input(dim);
             complex b = input(dim);
-            printf("%f\n",cos(a,b));
+            printf("%.2f\n",COS(a,b));
         }
         else if (strcmp(s,"quit")==0)
         {

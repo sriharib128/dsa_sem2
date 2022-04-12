@@ -16,7 +16,7 @@ int main()
     {
         char *s=(char*)malloc(sizeof(char)*20);
         scanf("%s",s);
-        printf("> done\n");
+        //printf("> done\n");
         int x,i;
 
         if(strcmp(s,"insert")==0)

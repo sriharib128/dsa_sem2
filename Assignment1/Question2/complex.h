@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 typedef struct _complex * complex;
 
@@ -20,6 +21,6 @@ complex sub(complex a , complex b);
 float mod (complex a);
 float square_root(float sum);
 float dot(complex a,complex b);
-float cos(complex a, complex b);
+float COS(complex a, complex b);
 
 #endif
