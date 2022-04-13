@@ -1,8 +1,8 @@
 #include "complex.h"
 
-complex input(int d)
+complex_P input(int d)
 {
-    complex a = (complex)malloc(sizeof(struct _complex));
+    complex_P a = (complex_P)malloc(sizeof(struct _complex));
     a->t =d;
     a->head = (float *)malloc(sizeof(float)*d);
     for(int i=0;i<d;i++)
@@ -10,7 +10,7 @@ complex input(int d)
     return a;
 }
 
-void print(complex a)
+void print(complex_P a)
 {
     int dim = a->t;
     for(int i=0;i<dim;i++)
@@ -19,9 +19,9 @@ void print(complex a)
     printf("\n");
 }
 
-complex add(complex a , complex b)
+complex_P add(complex_P a , complex_P b)
 {
-    complex c = (complex)malloc(sizeof(struct _complex));
+    complex_P c = (complex_P)malloc(sizeof(struct _complex));
     int dim = a->t;
     c->t = dim;
     float * temp = (float*)malloc(sizeof(float)*dim);
@@ -33,9 +33,9 @@ complex add(complex a , complex b)
     return c;
 }
 
-complex sub(complex a , complex b)
+complex_P sub(complex_P a , complex_P b)
 {
-    complex c = (complex)malloc(sizeof(struct _complex));
+    complex_P c = (complex_P)malloc(sizeof(struct _complex));
     int dim = a->t;
     c->t = dim;
     float * temp = (float*)malloc(sizeof(float)*dim);
@@ -47,7 +47,7 @@ complex sub(complex a , complex b)
     return c;
 }
 
-float mod(complex a)
+float mod(complex_P a)
 {
     int dim = a->t;
     float sum =0;
@@ -57,7 +57,7 @@ float mod(complex a)
     return sum;
 }
 
-float dot(complex a , complex b)
+float dot(complex_P a , complex_P b)
 {
     int dim = a->t;
     float sum =0;
@@ -65,7 +65,7 @@ float dot(complex a , complex b)
         sum += ((a->head)[i]) *((b->head)[i]);
     return sum;
 }
-float COS(complex a, complex b)
+float COS(complex_P a, complex_P b)
 {
     float x = dot(a,b) / (mod(a)*mod(b));
     return x;

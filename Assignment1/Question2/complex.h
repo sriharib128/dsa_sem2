@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <string.h>
 
-typedef struct _complex * complex;
+typedef struct _complex * complex_P ;
 
 struct _complex
 {
@@ -14,13 +14,13 @@ struct _complex
     float *head;
 };
 
-void print(complex a);
-complex input(int d);
-complex add(complex a , complex b);
-complex sub(complex a , complex b);
-float mod (complex a);
+void print(complex_P a);
+complex_P input(int d);
+complex_P add(complex_P a , complex_P b);
+complex_P sub(complex_P a , complex_P b);
+float mod (complex_P a);
 float square_root(float sum);
-float dot(complex a,complex b);
-float COS(complex a, complex b);
+float dot(complex_P a,complex_P b);
+float COS(complex_P a, complex_P b);
 
 #endif

@@ -189,7 +189,8 @@ int main()
     else if(strcmp(command, "COMPATIBILITY") == 0)
     {
       char userName[100], userName2[100];
-      scanf(" %s %s", userName, userName2);
+      scanf(" %s %s", userName,userName2);
+      printf("%s %s", userName ,userName2);
       int userIdx = -1;
       for(int a = 0; a < numUsers; a++)
         if(strcmp(userName, users[a]->name) == 0)
