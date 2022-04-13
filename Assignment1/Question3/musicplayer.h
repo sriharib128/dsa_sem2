@@ -3,8 +3,16 @@
 
 #include "Song.h"
 
-typedef struct _musicplayer * Player;
-struct _musicplayer
+typedef struct _queue * Queue;
+struct _queue
+{   
+    Queue prev;
+    Song_p song;
+    // int sno;   
+    Queue next;
+};
+typedef struct MusicPlayer * Player;
+struct MusicPlayer
 {
     Queue current ;
     Queue queue_head;
@@ -12,19 +20,10 @@ struct _musicplayer
     int count;
 };
 
-typedef struct _queue * Queue;
-struct _queue
-{   
-    Queue prev;
-    Song song;
-    // int sno;   
-    Queue next;
-};
-
 Player createMusicPlayer ();
-int addSongToQueue (Player P , Song S);
+int addSongToQueue (Player P , Song_p S);
 int removeSongFromQueue(Player P, int i);
 int playSong(Player P);
-Song getCurrentSong(Player P);
+Song_p getCurrentSong(Player P);
 
 #endif

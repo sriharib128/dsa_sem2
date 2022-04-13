@@ -1,8 +1,8 @@
 #include "user.h"
 
-Song makeSong(char * name , char * artist , float duration)
+Song_p makeSong(char * name , char * artist , float duration)
 {
-    Song S = (Song)malloc(sizeof(struct _song));
+    Song_p S = (Song_p)malloc(sizeof(struct Song));
     S->name = (char*)malloc(100);
     strcpy((S->name),name);
     S->artist = (char*)malloc(100);

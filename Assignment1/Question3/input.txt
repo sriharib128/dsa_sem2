@@ -1,0 +1,37 @@
+ADD_USER user1
+ADD_USER user2
+ADD_SONG song1 artist1 3.5
+ADD_SONG song2 artist2 4.5
+ADD_SONG song3 artist3 5.5
+ADD_SONG song4 artist4 6.5
+ADD_SONG song5 artist5 7.5 
+ADD_SONG song6 artist6 1
+
+INSERT_SONG user1 song1
+INSERT_SONG user1 song2
+INSERT_SONG user1 song3
+INSERT_SONG user2 song4
+INSERT_SONG user2 song2
+INSERT_SONG user2 song3
+
+REMOVE_SONG user1 0
+INSERT_SONG user1 song1
+REMOVE_SONG user1 1
+INSERT_SONG user1 song2
+REMOVE_SONG user1 2
+
+PLAY_SONG user1
+GET_SONG user1
+
+LIKE_SONG user1 song1
+LIKE_SONG user1 song3
+LIKE_SONG user1 song4
+LIKE_SONG user2 song6
+LIKE_SONG user2 song3
+LIKE_SONG user2 song4
+LIKE_SONG user2 song7
+UNLIKE_SONG user1 song3
+LIKE_SONG user1 song6
+print
+COMPATIBILITY user1 user2
+EXIT

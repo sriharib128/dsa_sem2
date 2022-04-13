@@ -1,8 +1,8 @@
 #include "user.h"
 
-User createUser(char * name)
+User_p createUser(char * name)
 {
-    User U = (User)malloc(sizeof(struct _user));
+    User_p U = (User_p)malloc(sizeof(struct User));
     U->name = (char *)malloc(100);
     strcpy(U->name , name);
     U->P = createMusicPlayer();
@@ -11,24 +11,24 @@ User createUser(char * name)
     return U;   
 }
 
-int addSongToQueueUser(User U , Song S)
+int addSongToQueueUser(User_p U , Song_p S)
 {
     return(addSongToQueue((U->P),S));
 }
-int removeSongFromQueueUser(User U , int pos)
+int removeSongFromQueueUser(User_p U , int pos)
 {
-    retrun(removeSongFromQueue((U->P),pos));
+    return(removeSongFromQueue((U->P),pos));
 }
-int playSongUser(User U)
+int playSongUser(User_p U)
 {
     return(playSong(U->P));
 }
-Song getCurrentSongUser(User U)
+Song_p getCurrentSongUser(User_p U)
 {
-    retrun(getCurrentSong(U->P));
+    return(getCurrentSong(U->P));
 }
 
-int addLikedSong(User U , Song S)
+int addLikedSong(User_p U , Song_p S)
 {
      if((U->liked_songs_head) == NULL)
     {
@@ -47,7 +47,8 @@ int addLikedSong(User U , Song S)
         Queue q = (Queue)malloc(sizeof(struct _queue));
         if(q==NULL)
             return 1;
-        q->prev = (U->liked_songs_tail);    
+        q->prev = (U->liked_songs_tail);
+        (U->liked_songs_tail)->next =q;    
         q->next = NULL;
         q->song = S;
         //q->sno = ((q->prev)->sno) +1;
@@ -58,7 +59,7 @@ int addLikedSong(User U , Song S)
 }
 
 
-int removeLikedSong(User U , Song S)
+int removeLikedSong(User_p U , Song_p S)
 {   
 
     //if( (i >= U->liked_no) || (i<0) )
@@ -107,17 +108,61 @@ int removeLikedSong(User U , Song S)
     return 1;
 }
 
-int userCompatibility(User U1 , User U2)
+int userCompatibility(User_p U1 , User_p U2)
 {
+
+    printf("%p name=%s liked_head = %p player = %p \n",U1,U1->name,U1->liked_songs_head , U1->P);
+    printf("%p name=%s liked_head = %p player = %p \n",U2,U2->name,U2->liked_songs_head , U2->P);
+    printf("\n\n");
+
     int ct =0;
     Queue a = U1->liked_songs_head;
     Queue b = U2->liked_songs_head;
-    while( (a->next !=NULL) || (b->next !=NULL))
-    {
-        if(a->song == b->song)
-            ct++;
+    printf("%p & %p\n", U1, U2);
+    while( (a !=NULL))
+    {   b = U2->liked_songs_head;
+        while (b !=NULL)
+        {   
+            printf("comparing %s and %s\n",a->song->name , b->song->name);
+            if(strcmp(a->song->name , b->song->name)==0)
+            {
+                printf(" > > > matched %s and %s\n",a->song->name , b->song->name);
+                ct++;
+            }    
+            b=b->next;
+        }
         a=a->next;
-        b=b->next;
     }
     return ct;
 }
+void print (User_p U)
+{
+    printf("-------printing user %p--------------\n",U);
+    printf("name = %s liked no = %d\n",U->name,U->liked_no);
+    for(Queue a = (U->liked_songs_head);a!=NULL;a=a->next)
+    {
+        printf("%s ",(a->song)->name);
+    }
+    printf("\nprinted liked_songs\n");
+    for(Queue a = (U->P)->queue_head;a!=NULL;a=a->next)
+    { 
+        printf("%p %s %p\n",a->prev,(a->song)->name,a->next);
+    }
+    printf("\nprinted player songs\n");
+    // printf("----------printed player songs-------------\n");
+    printf("XXXXXXXXXXXXXXXXXXXXXXxx\n");
+}
+void print_user(User_p * U_P,int no)
+{
+    printf("%p\n",U_P);
+    for(int i=0;i<no;i++)
+    {
+        printf("%p name=%s liked_head = %p player = %p \n",&U_P[i],U_P[i]->name,U_P[i]->liked_songs_head , U_P[i]->P);
+    }
+    printf("\n\n");
+}
+/*
+U1 = struct user *
+U_P = struct user **;
+U_P[0] = struct user *
+*/

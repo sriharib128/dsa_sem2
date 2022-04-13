@@ -1,0 +1,75 @@
+User user1 created successfully
+User user2 created successfully
+Song song1 with artist artist1 and duration 3.500000 created
+Song song2 with artist artist2 and duration 4.500000 created
+Song song3 with artist artist3 and duration 5.500000 created
+Song song4 with artist artist4 and duration 6.500000 created
+Song song5 with artist artist5 and duration 7.500000 created
+Song song6 with artist artist6 and duration 1.000000 created
+Song song1 added to queue of user user1
+Song song2 added to queue of user user1
+Song song3 added to queue of user user1
+Song song4 added to queue of user user2
+Song song2 added to queue of user user2
+Song song3 added to queue of user user2
+Song removed successfully
+Song song1 added to queue of user user1
+Song removed successfully
+Song song2 added to queue of user user1
+Song removed successfully
+Playing song
+Song song2 is playing
+Song song1 liked by user user1
+Song song3 liked by user user1
+Song song4 liked by user user1
+Song song6 liked by user user2
+Song song3 liked by user user2
+Song song4 liked by user user2
+No such song
+Song song3 unliked by user user1
+Song song6 liked by user user1
+-------printing user 0000026193e06d30--------------
+name = user1 liked no = 3
+song1 song4 song6 
+printed liked_songs
+0000000000000000 song2 0000026193e02060
+0000026193e02080 song1 0000000000000000
+
+printed player songs
+XXXXXXXXXXXXXXXXXXXXXXxx
+-------printing user 0000026193e01920--------------
+name = user2 liked no = 3
+song6 song3 song4 
+printed liked_songs
+0000000000000000 song4 0000026193e020e0
+0000026193e020c0 song2 0000026193e02100
+0000026193e020e0 song3 0000000000000000
+
+printed player songs
+XXXXXXXXXXXXXXXXXXXXXXxx
+one print completed 
+
+
+0000026193e01580
+0000026193e01580 name=user1 liked_head = 0000026193e020a0 player = 0000026193e06dd0 
+0000026193e01588 name=user2 liked_head = 0000026193e08af0 player = 0000026193e019c0 
+
+
+0000026193e06d30 name=user1 liked_head = 0000026193e020a0 player = 0000026193e06dd0 
+0000026193e06d30 name=user1 liked_head = 0000026193e020a0 player = 0000026193e06dd0 
+
+
+0000026193e06d30 & 0000026193e06d30
+comparing song1 and song1
+ > > > matched song1 and song1
+comparing song1 and song4
+comparing song1 and song6
+comparing song4 and song1
+comparing song4 and song4
+ > > > matched song4 and song4
+comparing song4 and song6
+comparing song6 and song1
+comparing song6 and song4
+comparing song6 and song6
+ > > > matched song6 and song6
+User compatibility is: 3

@@ -2,7 +2,7 @@
 
 Player createMusicPlayer()
 {
-    Player P = (Player)malloc(sizeof(struct _musicplayer));
+    Player P = (Player)malloc(sizeof(struct MusicPlayer));
     P->current = NULL;
     P->queue_head= NULL;
     P->queue_tail = NULL;
@@ -10,7 +10,7 @@ Player createMusicPlayer()
     return P;
 }
 
-int addSongToQueue(Player P, Song S)
+int addSongToQueue(Player P, Song_p S)
 {
     if((P->queue_head) == NULL)
     {
@@ -27,16 +27,32 @@ int addSongToQueue(Player P, Song S)
 
     }
     else
-    {
+    { 
+        //   printf("entered the fuction\n");
+    //     printf("head = %p and tail = %p\n",P->queue_head,P->queue_tail);
+    //     printf("head = %s and tail = %s\n",(P->queue_head)->song->name,P->queue_tail->song->name);
+        /*
+    NodePointer a = P->last;
+    a->next=temp;
+    temp->prev =a; 44
+    temp->next=NULL; 45
+    P->last = temp; 49
+    P->size = P->size+1; 48
+        */
         Queue q = (Queue)malloc(sizeof(struct _queue));
         if(q==NULL)
             return 1;
+        (P->queue_tail)->next = q;
         q->prev = (P->queue_tail);
         q->next = NULL;
         q->song = S;
         //q->sno = ((q->prev)->sno) +1;
         P->count = P->count +1;
         P->queue_tail = q;
+        Queue a = q;
+        // printf("%p %s %p\n",a->prev,(a->song)->name,a->next);
+        // printf("head = %p and tail = %p\n",P->queue_head,P->queue_tail);
+        // printf("head = %s and tail = %s\n",(P->queue_head)->song->name,P->queue_tail->song->name);
     }
     return 0;
 }
@@ -59,8 +75,9 @@ int removeSongFromQueue(Player P , int i)
         for(Queue a = P->queue_head; ; a=a->next)
         {
             if(i==0)
-            {
-                P->queue_head =a->next;
+            {   
+                P->queue_head =(P->queue_head)->next;
+                
                 (P->queue_head)->prev = NULL;
                 P->count = P->count -1;
                 if(P->current == a)
@@ -102,17 +119,17 @@ int playSong(Player P)
         return 1;
     if(P->current == NULL)
     {
-        P->current = (P->queue_head)->song;
+        P->current = (P->queue_head);
     }
     else
     {
         removeSongFromQueue(P,0);
-        P->current = (P->queue_head)->song;
+        P->current = (P->queue_head);
     }
     return 0;
 }
 
-Song getCurrentSong(Player P)
+Song_p getCurrentSong(Player P)
 {
-    return P->current;
+    return (P->current)->song;
 }

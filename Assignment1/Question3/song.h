@@ -1,15 +1,15 @@
 #ifndef _SONG_H
 #define _SONG_H
 
-typedef struct _song * Song;
+typedef struct Song * Song_p;
 
-struct _song
+struct Song
 {
     char * name;
     char * artist;
     float duration;
 };
 
-Song makeSong(char * name , char * artist , float duration);
+Song_p makeSong(char * name , char * artist , float duration);
 
 #endif
