@@ -87,13 +87,22 @@ void insert_at(my_dll_P P , int x , int i)
 
 void DELETE(my_dll_P P, int i)
 {
-    P->size = (P->size)-1;
+    //only one item is there in the list
+    if(P->size ==1 )
+    {
+        free(P->root);
+        P->root = NULL;
+        P->last = NULL;
+        P->size = 0;
+        return ;
+    }
     if(i==0)
     {
         NodePointer temporary = (P->root);
         P->root = (P->root)->next;
         (P->root)->prev = NULL;
         free(temporary);
+        P->size = (P->size)-1;
     }
     else if(i== (P->size)-1)
     {
@@ -101,6 +110,7 @@ void DELETE(my_dll_P P, int i)
         P->last = (P->last)->prev;
         (P->last)->next = NULL;
         free(temporary);
+        P->size = (P->size)-1;
     }
     else
     {
@@ -114,6 +124,7 @@ void DELETE(my_dll_P P, int i)
                 tempPrev->next = tempNext;
                 tempNext->prev = tempPrev;
                 free(a);
+                P->size = (P->size)-1;
                 return;
             }
             ct++;

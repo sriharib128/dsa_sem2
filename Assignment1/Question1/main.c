@@ -14,7 +14,7 @@ int main()
     my_dll_P P = createStruct();
     while(1)
     {
-        char *s=(char*)malloc(sizeof(char)*20);
+        char *s=(char*)malloc(sizeof(char)*100);
         scanf("%s",s);
         //printf("> done\n");
         int x,i;
