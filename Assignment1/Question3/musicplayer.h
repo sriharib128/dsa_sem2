@@ -1,7 +1,7 @@
 #ifndef _MUSICPLAYER_H
 #define _MUSICPLAYER_H
 
-#include "Song.h"
+#include "song.h"
 
 typedef struct _queue * Queue;
 struct _queue

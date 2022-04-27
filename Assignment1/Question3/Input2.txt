@@ -1,0 +1,35 @@
+ADD_USER abhinav
+ADD_SONG beast_mode aniruth 2.47
+ADD_SONG jolly_o_gymkhana thalapathy 3.25
+ADD_SONG arabic_kuthu aniruth 3.45
+ADD_USER gnana_prakash
+INSERT_SONG abhinav beast_mode
+INSERT_SONG abhinav arabic_kuthu
+INSERT_SONG abhinav Toofaan
+ADD_SONG Toofaan yash 3.12
+INSERT_SONG gnana_prakash Toofaan
+INSERT_SONG gnana_prakash jolly_o_gymkhana
+REMOVE_SONG gnana_prakash 1
+INSERT_SONG gnana_prakash arabic_kuthu
+PLAY_SONG abhinav
+PLAY_SONG gnana_prakash
+GET_SONG abhinav
+PLAY_SONG abhinav
+GET_SONG abhinav
+INSERT_SONG abhinav beast_mode
+INSERT_SONG abhinav arabic_kuthu
+INSERT_SONG abhinav Toofaan
+GET_SONG gnana_prakash
+PLAY_SONG gnana_prakash
+GET_SONG gnana_prakash
+INSERT_SONG gnana_prakash Toofaan
+INSERT_SONG gnana_prakash jolly_o_gymkhana
+INSERT_SONG gnana_prakash beast_mode
+LIKE_SONG abhinav arabic_kuthu
+LIKE_SONG gnana_prakash Toofaan
+LIKE_SONG abhinav beast_mode
+LIKE_SONG gnana_prakash beast_mode
+COMPATIBILITY abhinav gnana_prakash
+UNLIKE_SONG gnana_prakash beast_mode
+COMPATIBILITY abhinav gnana_prakash
+EXIT

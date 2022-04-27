@@ -8,4 +8,6 @@ struct node{
     NodePointer next;
     int data;
 };
+
+NodePointer createNode();
 #endif
