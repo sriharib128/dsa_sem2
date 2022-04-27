@@ -1,4 +1,127 @@
-#include "deque.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct dll * node;
+
+struct dll{
+    node prev;
+    node next;
+    long long int data;
+};
+
+typedef struct stDQueue * Dq;
+
+struct stDQueue{
+    long long int size;
+    node head;
+    node tail;
+};
+
+Dq createStruct()
+{
+    Dq Q =(Dq)malloc(sizeof(struct stDQueue));
+    Q->head=NULL;
+    Q->tail=NULL;
+    Q->size =0;
+    return Q;
+}
+
+void PushFront(Dq Q, long long int a)
+{
+    node temp = (node)malloc(sizeof(struct dll));
+    temp->data = a;
+    Q->size = Q->size+1;
+    if(Q->size==1)
+    {
+        Q->head=temp;
+        temp->next=NULL;
+        temp->prev=NULL;
+        Q->tail = temp;
+        return;
+    }
+    else
+    {
+        temp->next = Q->head;
+        Q->head->prev = temp;
+        temp->prev = NULL;
+        Q->head = temp;
+        return;
+    }
+}
+void PushBack(Dq Q, long long int a)
+{
+    node temp = (node)malloc(sizeof(struct dll));
+    temp->data = a;
+    Q->size = Q->size+1;
+    if(Q->size==1)
+    {
+        Q->head=temp;
+        temp->next=NULL;
+        temp->prev=NULL;
+        Q->tail = temp;
+        return;
+    }
+    else
+    {
+        temp->prev = Q->tail;
+        temp->next = NULL; 
+        Q->tail->next = temp;
+        Q->tail = temp;
+        return;
+    }
+}
+
+long long int PopFront(Dq Q)
+{   
+    Q->size = Q->size -1;
+    long long int element ;
+    if(Q->size ==0)
+    {
+        element = Q->head->data;
+        free(Q->head);
+        Q->head = NULL;
+        Q->tail = NULL;
+    }
+    else
+    {
+        node temp = Q->head;
+        Q->head = Q->head->next;
+        Q->head->prev = NULL;
+        element = temp->data;
+        free(temp);
+    }
+    return element;
+}
+
+long long int PopBack(Dq Q)
+{   
+    Q->size = Q->size -1;
+    long long int element ;
+    if(Q->size ==0)
+    {
+        element = Q->head->data;
+        free(Q->head);
+        Q->head = NULL;
+        Q->tail = NULL;
+    }
+    else
+    {
+        node temp = Q->tail;
+        Q->tail = Q->tail->prev;
+        Q->tail->next = NULL;
+        element = temp->data;
+        free(temp);
+    }
+    return element;
+}
+long long int Front(Dq Q)
+{
+    return Q->head->data;
+}
+long long int Back(Dq Q)
+{
+    return Q->tail->data;
+}
 
 int main()
 {
@@ -9,8 +132,6 @@ int main()
         scanf("%lld",&array[i]);
     Dq Q = createStruct();
     PushBack(Q,0);
-    // print(Q);
-    // printf("---\n");
     for(long long int i=1;i<M;i++)
     {
         while(1)
@@ -23,26 +144,15 @@ int main()
         }
         PushBack(Q,i);
     }
-    // print(Q);
-    // printf("first M windows completed\n");
     for(long long int i=M;i<N;i++)
     {
         printf("%lld ",array[Front(Q)]);
-        // printf("indexOfFront(%lld) minimumwindowsize(%lld)\n",Front(Q),(i-M));
         while(Front(Q)<=(i-M))
         {   
             PopFront(Q);
             if(Q->size ==0)
                 break;
         }
-        // print(Q);
-        // if(Q->size !=0)
-        // {   
-        //     printf("%lld  ",array[Front(Q)]);
-        //     printf("indexOfFront(%lld) minimumwindowsize(%lld)",Front(Q),(i-M));
-        // }
-        // else
-        //     printf("queue is empty\n");
         while(1)
         {
             if(Q->size==0)
@@ -53,16 +163,8 @@ int main()
                 break;
         }
         PushBack(Q,i);  
-        // print(Q);
-        // printf("%lld  ",array[Front(Q)]);
-        // printf("indexOfFront(%lld) minimumwindowsize(%lld)\n\n\n",Front(Q),(i-M));
     }
-    // long long int min =1e10;
-    // for(node a = Q->head ;a!=NULL;a=a->next)
-    // {
-    //     if(array[(a->data)]<min)
-    //         min = array[a->data];
-    // }
+
     printf("%lld",array[Front(Q)]);
     return 0;
 }   
