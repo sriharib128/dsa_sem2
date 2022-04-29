@@ -34,6 +34,7 @@ void print_reverse(Dq P);
 #endif
 
 /*
+Minimum Sliding Window Dequeue
 Create a deque to store k elements.
 Run a loop and insert first k elements in the deque. Before inserting the element, check if the element at the back of the queue is smaller than the current element, if it is so remove the element from the back of the deque, until all elements left in the deque are greater than the current element. Then insert the current element, at the back of the deque.
 Now, run a loop from k to end of the array.

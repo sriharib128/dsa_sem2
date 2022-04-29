@@ -46,6 +46,7 @@ int main()
             }   
         }
     }
+    printf("%lld\n",sum);
     Stack S2 = (Stack)malloc(sizeof(struct stack_struct));
     S2->array = (long long int *)malloc(sizeof(long long int)*N);
     S2->top = -1;
@@ -64,6 +65,7 @@ int main()
             {   
                 int j  = Top(S2);
                 sum = sum + j-i +1;
+                printf("%d and %d\n",i,j);
                 Pop(S2);
                 if(S2->size ==0)
                 {
@@ -74,6 +76,7 @@ int main()
                 {
                     j=Top(S2);
                     sum = sum + j-i +1;
+                printf("%d and %d\n",i,j);
                     Pop(S2);
                     if(S2->size ==0)
                         break;

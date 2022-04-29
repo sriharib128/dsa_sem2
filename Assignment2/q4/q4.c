@@ -1,14 +1,65 @@
-#include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct stack_struct* Stack;
+
+struct stack_struct {
+    long long  int top;
+    long long int size;
+    long long int *array;
+};
+Stack create(long long int n)
+{
+    Stack S = (Stack)malloc(sizeof(struct stack_struct));
+    S->array = (long long int *)malloc(sizeof(long long int)*n);
+    S->top = -1;
+    S->size =0;
+    return S;
+}
+long long int Pop(Stack S)
+{
+    if(S->size >0)
+    {
+        S->top = (S->top -1);
+        S->size = S->size - 1;  
+        return (S->array)[S->top+1];
+    }
+    else
+        return (-1);
+}
+
+void Push(Stack S,long long int a)
+{
+    if(S->size == 0)
+    {
+        S->array[0] = a;
+        S->top = 0;
+        S->size =1;
+    }
+    else
+    {
+        S->top = S->top + 1;
+        S->array[S->top] = a;
+        S->size = S->size + 1;
+    }
+    return;
+}
+
+long long int Top(Stack S)
+{
+    if(S->size < 0)
+        return -1;
+    else
+        return S->array[S->top];
+}
 
 long long int max_area(long long int* array,int M)
 {
-    for(int i=0;i<M;i++)
-        printf("%lld ",array[i]);
-    printf("\n");
+    // for(int i=0;i<M;i++)
+    //     printf("%lld ",array[i]);
+    // printf("\n");
     Stack S = create(M);
     long long int area = 0;
-    // int i =0;
-    // Push(S,i);
     for(int i=0;i<M;i++)
     {
         if(S->size == 0)
@@ -24,8 +75,7 @@ long long int max_area(long long int* array,int M)
             {   
                 while (array[Top(S)]>array[i])
                 {   
-                    long long int temp  =Pop(S);
-                    // Pop(S); 
+                    long long int temp = Pop(S);
                     long long int temp_area;
                     if(S->size ==0)
                         temp_area = array[temp]*i;
@@ -45,7 +95,6 @@ long long int max_area(long long int* array,int M)
     while (S->size !=0)
     {
         long long int temp  = Pop(S);
-        // Pop(S); 
         long long int temp_area;
         if(S->size ==0)
             temp_area = array[temp]*M;
@@ -72,17 +121,8 @@ int main()
                 array[i][j] = 1;
             else
                 array[i][j] = 0;
-            // printf("%lld ",array[i][j]);
         }
-        // printf("\n"); 
     }
-    // N=4;M=4;
-    // long long int array[4][4] = {
-	// 	{ 0, 1, 1, 0 },
-	// 	{ 1, 1, 1, 1 },
-	// 	{ 1, 1, 1, 1 },
-	// 	{ 1, 1, 0, 0 },
-	// };
     for(int i=1;i<N;i++)
         for(int j=0;j<M;j++)
         {
@@ -94,21 +134,10 @@ int main()
     for(int i=0;i<N;i++)
     {   
         long long int temp = max_area(array[i],M);
-        printf("%lld ==> %d th row\n\n",temp,i);
+        // printf("%lld ==> %d th row\n\n",temp,i);
         if(temp>area)
             area = temp;
     }
     printf("%lld",area);
+    return 0;
 }
-/*
-3 ==> 0 th row
-
-2 0 2 1 2 1 2
-5 ==> 1 th row
-
-3 1 3 2 3 2 3
-10 ==> 2 th row
-
-4 2 4 3 4 3 0
-12 ==> 3 th row
-*/
