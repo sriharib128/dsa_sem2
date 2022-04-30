@@ -52,6 +52,11 @@ long long int Top(Stack S)
     else
         return S->array[S->top];
 }
+long long int Size(Stack S)
+{
+    return S->size;
+}
+
 
 long long int max_area(long long int* array,int M)
 {
@@ -62,7 +67,7 @@ long long int max_area(long long int* array,int M)
     long long int area = 0;
     for(int i=0;i<M;i++)
     {
-        if(S->size == 0)
+        if(Size(S) == 0)
             Push(S,i);
         else
         {
@@ -77,13 +82,13 @@ long long int max_area(long long int* array,int M)
                 {   
                     long long int temp = Pop(S);
                     long long int temp_area;
-                    if(S->size ==0)
+                    if(Size(S) ==0)
                         temp_area = array[temp]*i;
                     else
                         temp_area = array[temp]*(i-Top(S)-1);
                     if(temp_area>area)
                         area = temp_area;
-                    if(S->size==0)
+                    if(Size(S)==0)
                     {
                         break;
                     }
@@ -92,11 +97,11 @@ long long int max_area(long long int* array,int M)
             }
         }
     }
-    while (S->size !=0)
+    while (Size(S) !=0)
     {
         long long int temp  = Pop(S);
         long long int temp_area;
-        if(S->size ==0)
+        if(Size(S) ==0)
             temp_area = array[temp]*M;
         else
             temp_area = array[temp]*(M-Top(S)-1);
@@ -134,7 +139,6 @@ int main()
     for(int i=0;i<N;i++)
     {   
         long long int temp = max_area(array[i],M);
-        // printf("%lld ==> %d th row\n\n",temp,i);
         if(temp>area)
             area = temp;
     }

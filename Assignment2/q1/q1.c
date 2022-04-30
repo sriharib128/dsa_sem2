@@ -54,6 +54,15 @@ int isEmpty (Stack S)
         return 0;
 }
 
+Stack create(long long int size)
+{
+    Stack S = (Stack)malloc(sizeof(struct stack_struct));
+    S->size = 0;
+    S->top = -1;
+    S->array = (long long int *)malloc(sizeof(long long int)*size);
+    return S;
+}
+
 long long int Size(Stack S)
 {
     return S->size;
@@ -68,7 +77,7 @@ long long int gcd(long long int a ,long long int b ){
 
 void process (Stack S)
 {
-    if(S->size <= 1)
+    if(Size(S) <= 1)
         return;
     long long int temp1 = Top(S);
     Pop(S);
@@ -81,7 +90,7 @@ void process (Stack S)
         Pop(S);
         long long int lcm = temp1*temp2/g;
         Push(S,lcm);
-        if(S->size>1)
+        if(Size(S)>1)
         {
             temp1 = Top(S);
             Pop(S);
@@ -100,10 +109,7 @@ int main(){
     long long int size;
     scanf("%lld",&size);
 
-    Stack S = (Stack)malloc(sizeof(struct stack_struct));
-    S->size = 0;
-    S->top = -1;
-    S->array = (long long int *)malloc(sizeof(long long int)*size);
+    Stack S = create(size);
 
     for(int i=0;i<size;i++)
     {
@@ -113,14 +119,11 @@ int main(){
         process (S);
     }
     process (S);
-    size = S->size;
+    size = Size(S);
     printf("%lld\n",size);
     long long int* reverse = (long long int *)malloc(sizeof(long long int)*size);
     for(int i=0;i<size;i++)
-    {
         reverse[i] = Pop(S);
-        // printf("%lld ",(S->array)[i]);
-    }
     for(int i=size-1;i>=0;i--)
         printf("%lld ",reverse[i]);
     return 0;

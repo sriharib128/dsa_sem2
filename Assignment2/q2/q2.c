@@ -122,7 +122,10 @@ long long int Back(Dq Q)
 {
     return Q->tail->data;
 }
-
+long long int Size(Dq Q)
+{
+    return Q->size;
+}
 int main()
 {
     long long int M,N;
@@ -135,7 +138,7 @@ int main()
     for(long long int i=1;i<M;i++)
     {
         while(1)
-        {   if(Q->size==0)
+        {   if(Size(Q)==0)
                 break;
             if(array[Back(Q)]>=array[i])
                 PopBack(Q);
@@ -150,12 +153,12 @@ int main()
         while(Front(Q)<=(i-M))
         {   
             PopFront(Q);
-            if(Q->size ==0)
+            if(Size(Q) ==0)
                 break;
         }
         while(1)
         {
-            if(Q->size==0)
+            if(Size(Q)==0)
                 break;
             if(array[Back(Q)]>=array[i])
                 PopBack(Q);
@@ -167,4 +170,4 @@ int main()
 
     printf("%lld",array[Front(Q)]);
     return 0;
-}   
+}

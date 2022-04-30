@@ -46,23 +46,34 @@ long long int Top(Stack S)
         return S->array[S->top];
 }
 
+long long int Size(Stack S)
+{
+    return S->size;
+}
+
+Stack create(long long int size)
+{
+    Stack S = (Stack)malloc(sizeof(struct stack_struct));
+    S->size = 0;
+    S->top = -1;
+    S->array = (long long int *)malloc(sizeof(long long int)*size);
+    return S;
+}
+
 int main()
 {
     long long int N;
     scanf("%lld",&N);
     long long int array[N];
-    for(int i=0;i<N;i++)
+    for(long long int i=0;i<N;i++)
         scanf("%lld",&array[i]);
     
-    Stack S = (Stack)malloc(sizeof(struct stack_struct));
-    S->array = (long long int *)malloc(sizeof(long long int)*N);
-    S->top = -1;
-    S->size = 0;
+    Stack S = create(N);
 
     long long int sum =0;
     for(int i=0;i<N;i++)
     {
-        if(S->size ==0)
+        if(Size(S) ==0)
         {   
             Push(S,i);
         }
@@ -75,9 +86,9 @@ int main()
                 int j  = Top(S);
                 sum = sum + i-j +1;
                 Pop(S);
-                if(S->size !=0)
+                if(Size(S) !=0)
                     sum = sum + j-Top(S)+1;
-                if(S->size ==0)
+                if(Size(S) ==0)
                 {
                     Push(S,i);
                     continue;
@@ -87,20 +98,20 @@ int main()
                     j=Top(S);
                     sum = sum + i-j +1;
                     Pop(S);
-                    if(S->size !=0)
+                    if(Size(S) !=0)
                         sum = sum + j-Top(S)+1;
-                    if(S->size ==0)
+                    if(Size(S) ==0)
                         break;
                 }
                 Push(S,i);
             }   
         }
     }
-    while(S->size!=0)
+    while(Size(S)!=0)
     {
         int j=Top(S);
         Pop(S);
-        if(S->size !=0)
+        if(Size(S) !=0)
             sum = sum + j-Top(S)+1;
     }
     printf("%lld",sum);
