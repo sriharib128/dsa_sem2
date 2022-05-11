@@ -1,4 +1,29 @@
 #include "deque.h"
+void printLevelOrder(tree Root)
+{
+    if (Root == NULL)
+    {
+        return;
+    }
+
+    Dq Q = createStruct();
+    PushBack(Q, Root);
+
+    while (isEmpty(Q) != 1)
+    {
+        printf("%d ", Q->head->data->data);
+
+        if (Q->head->data->left != NULL)
+        {
+            PushBack(Q, Q->head->data->left);
+        }
+        if (Q->head->data->right != NULL)
+        {
+            PushBack(Q, Q->head->data->right);
+        }
+        PopFront(Q);
+    }
+}
 
 int isLite(int left,int current , int right)
 {
@@ -29,7 +54,6 @@ int Post_Order(tree T,long int * min)
     }
     return 0;
 }
-
 
 int main()
 {
@@ -83,9 +107,11 @@ int main()
             }
         }
         long int min = 1e6;
-        Post_Order(Head,&min);
-        printf("%ld\n",min);
-        delete(Head);
+        printLevelOrder(Head);
+        printf("-----------------------\n");
+        // Post_Order(Head,&min);
+        // printf("%ld\n",min);
+        // delete(Head);
     }
     return 0;
 }

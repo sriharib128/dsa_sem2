@@ -3,17 +3,17 @@
 
 void printBinary(int num){
 
-	for(int i= 10 ; i>=0; i--) // prints upto 11 bit number
+	for(int i=64 ; i>=0; i--) // prints upto 11 bit number
 		printf("%d",(num>>i)&1);	
     printf("\n");
 }
-long long int no_zeros(int a)
+long long int no_zeros(long long int a)
 {
     long long int ct =-1;
-    for(int i =0;i<=31;i++)
+    for(int i =0;i<=64;i++)
     {
         ct++;
-        if(a&(1<<i))
+        if(a&(1LL<<i))
             break;
     }
     return ct;
@@ -27,5 +27,10 @@ long long int power_two(int power)
 }
 int main()
 {
-    printf("%lld",power_two(20));
+    for(int i=60;i<=63;i++)
+    {
+        printf("%d - %lld - ",i,no_zeros(power_two(i)));
+        printf("%lld  = ",power_two(i));
+        printBinary(power_two(i));
+    }
 }

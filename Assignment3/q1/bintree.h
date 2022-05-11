@@ -8,7 +8,6 @@ struct BinTree{
     tree left;
     int data;
     tree right;
-    int level;
 };
 void PreOrder(tree T);
 void InOrder(tree T);
