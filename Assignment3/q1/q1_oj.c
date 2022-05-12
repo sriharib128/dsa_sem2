@@ -460,7 +460,7 @@ int main()
         while (Size(Q)!=0)
         {
             PopFront(Q);
-        }
+        } 
         free(Q);
         delete(Head);
     }
