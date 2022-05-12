@@ -26,7 +26,7 @@ void printLevelOrder(tree Root)
     free(Q);
 }
 
-void check_asceding(tree current)
+void check_asceding(tree current,long long int* min)
 {   
     if(current->left == NULL && current->right == NULL)
     {
@@ -34,11 +34,13 @@ void check_asceding(tree current)
         current->sum = current->data;
         current->max_value = current->data;
         current->min_value = current->data;
+        if(*min>current->sum)
+            *min = current->sum;
     }
     else if((current->left ==NULL) &&(current->right !=NULL))
     {
         if(current->right->isBST == (-1))
-            check_asceding(current->right);
+            check_asceding(current->right,min);
         if(current->isBST == (-1))
         {
             if(current->data < current->right->min_value)
@@ -47,6 +49,8 @@ void check_asceding(tree current)
                 current->min_value = current->data;
                 current->max_value = current->right->max_value;
                 current->sum = current->right->sum + current->data;
+                if(*min>current->sum)
+                    *min = current->sum;
             }
             else
                 current->isBST =0;
@@ -55,7 +59,7 @@ void check_asceding(tree current)
     else if((current->left !=NULL) && (current->right ==NULL))
     {   
         if(current->left->isBST ==(-1))
-            check_asceding(current->left);
+            check_asceding(current->left,min);
         if(current->isBST == (-1))
         {
             if(current->data > current->left->max_value)
@@ -64,6 +68,8 @@ void check_asceding(tree current)
                 current->min_value = current->left->min_value;
                 current->max_value = current->data;
                 current->sum = current->left->sum + current->data;
+                if(*min>current->sum)
+                    *min = current->sum;
             }
             else
                 current->isBST = 0;
@@ -72,9 +78,9 @@ void check_asceding(tree current)
     if(current->left != NULL && current ->right != NULL)
     {
         if(current->left->isBST ==(-1))
-            check_asceding(current->left);
+            check_asceding(current->left,min);
         if(current->right->isBST == (-1))
-            check_asceding(current->right);
+            check_asceding(current->right,min);
         if((current->left->isBST == 1) && (current->right->isBST == 1))
         {
             if((current->data > current->left->max_value) && (current->data < current->right->min_value))
@@ -83,6 +89,8 @@ void check_asceding(tree current)
                 current->min_value = current->left->min_value;
                 current->max_value = current->right->max_value;
                 current->sum = current->left->sum + current->right->sum + current->data;
+                if(*min>current->sum)
+                    *min = current->sum;
             }
         }
         if((current->left->isBST == 0) || (current->right->isBST == 0))
@@ -92,7 +100,7 @@ void check_asceding(tree current)
     }
 }
 
-void check_descending(tree current)
+void check_descending(tree current,long long int* min)
 {   
     if(current->left == NULL && current->right == NULL)
     {
@@ -100,11 +108,13 @@ void check_descending(tree current)
         current->sum = current->data;
         current->max_value = current->data;
         current->min_value = current->data;
+        if(*min>current->sum)
+            *min = current->sum;
     }
     else if((current->left ==NULL) &&(current->right !=NULL))
     {
         if(current->right->isBST == (-1))
-            check_descending(current->right);
+            check_descending(current->right,min);
         if(current->isBST == (-1))
         {
             if(current->data > current->right->max_value)
@@ -113,6 +123,8 @@ void check_descending(tree current)
                 current->max_value = current->data;
                 current->min_value = current->right->min_value;
                 current->sum = current->right->sum + current->data;
+                if(*min>current->sum)
+                    *min = current->sum;
             }
             else
                 current->isBST =0;
@@ -121,7 +133,7 @@ void check_descending(tree current)
     else if((current->left !=NULL) && (current->right ==NULL))
     {   
         if(current->left->isBST ==(-1))
-            check_descending(current->left);
+            check_descending(current->left,min);
         if(current->isBST == (-1))
         {
             if(current->data < current->left->min_value)
@@ -130,6 +142,8 @@ void check_descending(tree current)
                 current->min_value = current->data;
                 current->max_value = current->left->max_value;
                 current->sum = current->left->sum + current->data;
+                if(*min>current->sum)
+                    *min = current->sum;
             }
             else
                 current->isBST = 0;
@@ -138,9 +152,9 @@ void check_descending(tree current)
     if(current->left != NULL && current ->right != NULL)
     {
         if(current->left->isBST ==(-1))
-            check_descending(current->left);
+            check_descending(current->left,min);
         if(current->right->isBST == (-1))
-            check_descending(current->right);
+            check_descending(current->right,min);
         if((current->left->isBST == 1) && (current->right->isBST == 1))
         {
             if((current->data < current->left->min_value) && (current->data > current->right->max_value))
@@ -149,6 +163,8 @@ void check_descending(tree current)
                 current->min_value = current->right->min_value;
                 current->max_value = current->left->max_value;
                 current->sum = current->left->sum + current->right->sum + current->data;
+                if(*min>current->sum)
+                    *min = current->sum;
             }
         }
         if((current->left->isBST == 0) || (current->right->isBST == 0))
@@ -173,8 +189,9 @@ long long int checkLevelOrder(tree Root)
     {
         // printf("%d ", Q->head->data->data);
         tree temp = Q->head->data;
-        if(temp->sum < min)
-            min = temp->sum;
+        printf("data=%d max_value=%lld min_value = %lld sum = %lld\n",temp->data,temp->max_value,temp->min_value,temp->sum);
+        // if(temp->sum < min)
+        //     min = temp->sum;
         temp->sum =0;
         temp->max_value =0;
         temp->min_value =0;
@@ -240,19 +257,22 @@ int main()
                 current->left = temp;
             }
         }
-        long int min = 1e6;
-        // printLevelOrder(Head);
-        // printf("-----------------------\n");
-        check_asceding(Head);
-        long long int min_one = checkLevelOrder(Head);
-        check_descending(Head);
-        long long int min_two = checkLevelOrder(Head);
+        
+        long long int min_one = INT_MAX;
+        check_asceding(Head,&min_one);
+        checkLevelOrder(Head);
+        printf("-----------------------\n");
+        
+        long long int min_two = INT_MAX;
+        check_descending(Head,&min_two);
+        checkLevelOrder(Head);
+        printf("-----------------------\n");
         // printf("%lld %lld\n",min_one,min_two);
         if(min_one<min_two)
             printf("%lld\n",min_one);
         else
             printf("%lld\n",min_two);
-        // printf("-----------------------\n\n");
+        printf("-----------------------\n\n");
         while (Size(Q)!=0)
         {
             PopFront(Q);
