@@ -239,7 +239,7 @@ void check_asceding(tree current,long long int* min)
             check_asceding(current->right,min);
         if(current->isBST == (-1))
         {
-            if(current->data < current->right->min_value)
+            if((current->right->isBST == 1)&&(current->data < current->right->min_value))
             {
                 current->isBST = 1;
                 current->min_value = current->data;
@@ -258,7 +258,7 @@ void check_asceding(tree current,long long int* min)
             check_asceding(current->left,min);
         if(current->isBST == (-1))
         {
-            if(current->data > current->left->max_value)
+            if((current->left->isBST ==1) && (current->data > current->left->max_value))
             {
                 current->isBST = 1;
                 current->min_value = current->left->min_value;
@@ -313,7 +313,7 @@ void check_descending(tree current,long long int* min)
             check_descending(current->right,min);
         if(current->isBST == (-1))
         {
-            if(current->data > current->right->max_value)
+            if((current->right->isBST == 1)&&(current->data > current->right->max_value))
             {
                 current->isBST = 1;
                 current->max_value = current->data;
@@ -331,8 +331,8 @@ void check_descending(tree current,long long int* min)
         if(current->left->isBST ==(-1))
             check_descending(current->left,min);
         if(current->isBST == (-1))
-        {
-            if(current->data < current->left->min_value)
+        {   
+            if ((current->left->isBST ==1)&&(current->data < current->left->min_value))
             {
                 current->isBST = 1;
                 current->min_value = current->data;
@@ -370,35 +370,6 @@ void check_descending(tree current,long long int* min)
     }
 }
 
-// long long int checkLevelOrder(tree Root)
-// {   
-//     long long int min = INT_MAX;
-//     if (Root == NULL)
-//     {
-//         return 0;
-//     }
-
-//     Dq Q = createStruct();
-//     PushBack(Q, Root);
-
-//     while (isEmpty(Q) != 1)
-//     {
-//         tree temp = Q->head->data;
-//         printf("data=%d max_value=%lld min_value = %lld sum = %lld\n",temp->data,temp->max_value,temp->min_value,temp->sum);
-//         temp->sum =0;
-//         temp->max_value =0;
-//         temp->min_value =0;
-//         temp->isBST = -1;
-//         if (Q->head->data->left != NULL)
-//             PushBack(Q, Q->head->data->left);
-//         if (Q->head->data->right != NULL)
-//             PushBack(Q, Q->head->data->right);
-//         PopFront(Q);
-//     }
-//     free(Q);
-//     return min;
-// }
- 
 int main()
 {
     int t;
