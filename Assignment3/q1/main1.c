@@ -260,19 +260,19 @@ int main()
         
         long long int min_one = INT_MAX;
         check_asceding(Head,&min_one);
-        checkLevelOrder(Head);
-        printf("-----------------------\n");
+        // checkLevelOrder(Head);
+        // printf("-----------------------\n");
         
         long long int min_two = INT_MAX;
         check_descending(Head,&min_two);
-        checkLevelOrder(Head);
-        printf("-----------------------\n");
+        // checkLevelOrder(Head);
+        // printf("-----------------------\n");
         // printf("%lld %lld\n",min_one,min_two);
         if(min_one<min_two)
             printf("%lld\n",min_one);
         else
             printf("%lld\n",min_two);
-        printf("-----------------------\n\n");
+        // printf("-----------------------\n\n");
         while (Size(Q)!=0)
         {
             PopFront(Q);
