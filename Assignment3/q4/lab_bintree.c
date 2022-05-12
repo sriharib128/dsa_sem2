@@ -6,6 +6,7 @@ tree createBinary(char data)
     T->data = data;
     T->left = NULL;
     T->right = NULL;
+    T->index = -1;
     return T;
 }
 int max(int a , int b)
@@ -39,13 +40,27 @@ int depth(tree T)
     return 1 + max(depth(T->left),depth(T->right));
 }
 
+void PreOrder_Index(tree T,long int* index)
+{
+    if(T== NULL)
+        return;
+    else
+    {
+        T->index = *index;
+        *index = *index + 1;
+        // printf("%c-%ld\t",T->data,T->index);
+        PreOrder_Index(T->left,index);
+        PreOrder_Index(T->right,index);
+    }
+    return;
+}
 void PreOrder(tree T)
 {
     if(T== NULL)
         return;
     else
     {
-        printf("%c ",T->data);
+        printf("%c-%ld\t",T->data,T->index);
         PreOrder(T->left);
         PreOrder(T->right);
     }
@@ -102,3 +117,4 @@ void InOrder(tree T)
 //     PostOrder(root);
 //     return 0;
 // }
+

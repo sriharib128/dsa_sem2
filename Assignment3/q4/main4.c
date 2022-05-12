@@ -1,24 +1,25 @@
 #include "bintree.h"
 
-// void PreOrder_Substring(tree T,char * pre_string)
-// {
-//     if(T== NULL)
-//         return;
-//     else
-//     {
-//         int i=strlen(pre_string);
-//         pre_string[i] = T->data;
-//         pre_string[i+1] ='\0';
-//         PreOrder(T->left);
-//         PreOrder(T->right);
-//     }
-//     return;
-// }
+void PreOrder_Substring(tree T,char * pre_string)
+{
+    if(T== NULL)
+        return;
+    else
+    {
+        int i=strlen(pre_string);
+        pre_string[i] = T->data;
+        pre_string[i+1] ='\0';
+        PreOrder_Substring(T->left,pre_string);
+        PreOrder_Substring(T->right,pre_string);
+    }
+    return;
+}
 
 int main()
 {   
+    // printf("HI\n");
     long int N;
-    scanf("%lld",&N);
+    scanf("%ld",&N);
     tree array[N+1];
     char string[N+10];
     scanf("%s",string);
@@ -37,16 +38,15 @@ int main()
             array[A-1]->right = array[B-1];
         }
     }
-    // InOrder(array[0]);
-    // return 0;
+    long int index =0;
+    PreOrder_Index(array[0],&index);
+    // printf("--\n");
     char s[1000010];
     scanf("%s",s);
-    printf("subsrting = %s \n",s);
     long int Q;
     scanf("%ld",&Q);
     while (Q--)
     {
-        
         int t;
         scanf("%d",&t);
         if(t==1)
@@ -56,9 +56,11 @@ int main()
             char c;
             char temp;
             scanf(" %c",&c);
-            printf("%c\n",c);
-            scanf(" %c",&temp);
-            array[I-1]->data =c; 
+            // scanf(" %c",&temp);
+            array[I-1]->data =c;
+            index=0;
+            // PreOrder(array[0],&index);
+            // printf("--\n");
         }
         else if (t==2)
         {
@@ -66,21 +68,20 @@ int main()
             scanf("%ld %ld %ld",&L,&R,&I);
             char substring[1000010];
             int i;
-            for(i=L;i<=R;i++)
+            for(i=L-1;i<=R-1;i++)
             {
-                substring[i-L] = s[i];
+                substring[i-L+1] = s[i];
             }
             substring[i] = '\0';
             char pre_string[1000010];
             pre_string[0]='\0';
-            // PreOrder_Substring(array[I-1],pre_string);
+            PreOrder_Substring(array[I-1],pre_string);
+            // printf("%s %s\n",substring,pre_string);
             if(strcmp(substring,pre_string)==0)
                 printf("YES\n");
             else
                 printf("NO\n");
         }
-        printf("Hi\n");
-        return 0;
     }
     return 0;
 }

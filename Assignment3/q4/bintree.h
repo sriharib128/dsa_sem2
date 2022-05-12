@@ -8,6 +8,7 @@ struct BinTree{
     tree left;
     char data;
     tree right;
+    long int index;
 };
 void PreOrder(tree T);
 void InOrder(tree T);
@@ -15,4 +16,6 @@ void PostOrder(tree T);
 int depth(tree T);
 tree createBinary(char data);
 void delete(tree T);
+void PreOrder_Index(tree T,long int* index);
 #endif
+
