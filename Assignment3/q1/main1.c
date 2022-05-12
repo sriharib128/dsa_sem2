@@ -121,31 +121,99 @@ void check_asceding(tree current)
     }
 }
 
-// void checkLevelOrder(tree Root)
-// {
-//     if (Root == NULL)
-//     {
-//         return;
-//     }
+void check_descending(tree current)
+{   
+    if(current->left == NULL && current->right == NULL)
+    {
+        current->isBST = 1;
+        current->sum = current->data;
+        current->max_value = current->data;
+        current->min_value = current->data;
+    }
+    else if((current->left ==NULL) &&(current->right !=NULL))
+    {
+        if(current->right->isBST == (-1))
+            check_descending(current->right);
+        if(current->isBST == (-1))
+        {
+            if(current->data < current->right->min_value)
+            {
+                current->isBST = 1;
+                current->min_value = current->data;
+                current->max_value = current->right->max_value;
+                current->sum = current->right->sum + current->data;
+            }
+            else
+                current->isBST =0;
+        }
+    }
+    else if((current->left !=NULL) && (current->right ==NULL))
+    {   
+        if(current->left->isBST ==(-1))
+            check_descending(current->left);
+        if(current->isBST == (-1))
+        {
+            if(current->data > current->left->max_value)
+            {
+                current->isBST = 1;
+                current->min_value = current->left->min_value;
+                current->max_value = current->data;
+                current->sum = current->left->sum + current->data;
+            }
+            else
+                current->isBST = 0;
+        }
+    }
+    if(current->left != NULL && current ->right != NULL)
+    {
+        if(current->left->isBST ==(-1))
+            check_descending(current->left);
+        if(current->right->isBST == (-1))
+            check_descending(current->right);
+        if((current->left->isBST == 1) && (current->right->isBST == 1))
+        {
+            if((current->data > current->left->max_value) && (current->data < current->right->min_value))
+            {
+                current->isBST = 1;
+                current->min_value = current->left->min_value;
+                current->max_value = current->right->max_value;
+                current->sum = current->left->sum + current->right->sum + current->data;
+            }
+        }
+        if((current->left->isBST == 0) || (current->right->isBST == 0))
+        {
+            current->isBST = 0;
+        }
+    }
+}
 
-//     Dq Q = createStruct();
-//     PushBack(Q, Root);
+long long int checkLevelOrder(tree Root)
+{   
+    long long int min = INT_MAX;
+    if (Root == NULL)
+    {
+        return 0;
+    }
 
-//     while (isEmpty(Q) != 1)
-//     {
-//         printf("%d ", Q->head->data->data);
+    Dq Q = createStruct();
+    PushBack(Q, Root);
 
-//         if (Q->head->data->left != NULL)
-//         {
-//             PushBack(Q, Q->head->data->left);
-//         }
-//         if (Q->head->data->right != NULL)
-//         {
-//             PushBack(Q, Q->head->data->right);
-//         }
-//         PopFront(Q);
-//     }
-// }
+    while (isEmpty(Q) != 1)
+    {
+        // printf("%d ", Q->head->data->data);
+        tree temp = Q->head->data;
+        if(temp->sum < min)
+            min = temp->sum;
+        temp->isBST=-1;
+        temp->sum =0;
+        if (Q->head->data->left != NULL)
+            PushBack(Q, Q->head->data->left);
+        if (Q->head->data->right != NULL)
+            PushBack(Q, Q->head->data->right);
+        PopFront(Q);
+    }
+    return min;
+}
 
 int main()
 {
@@ -199,11 +267,14 @@ int main()
             }
         }
         long int min = 1e6;
-        printLevelOrder(Head);
-        printf("-----------------------\n");
+        // printLevelOrder(Head);
+        // printf("-----------------------\n");
         check_asceding(Head);
-        printLevelOrder(Head);
-        printf("-----------------------\n\n\n\n");
+        long long int min_one = checkLevelOrder(Head);
+        check_descending(Head);
+        long long int min_two = checkLevelOrder(Head);
+        printf("%lld %lld\n",min_one,min_two);
+        // printf("-----------------------\n\n");
     }
     return 0;
 }
