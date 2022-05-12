@@ -370,6 +370,35 @@ void check_descending(tree current,long long int* min)
     }
 }
 
+long long int checkLevelOrder(tree Head)
+{   
+    long long int min = INT_MAX;
+    if (Head == NULL)
+    {
+        return 0;
+    }
+
+    Dq Q = createStruct();
+    PushBack(Q, Head);
+
+    while (isEmpty(Q) != 1)
+    {
+        tree temp = Q->head->data;
+        // printf("data=%d max_value=%lld min_value = %lld sum = %lld\n",temp->data,temp->max_value,temp->min_value,temp->sum);
+        temp->sum =0;
+        temp->max_value =0;
+        temp->min_value =0;
+        temp->isBST = -1;
+        if (Q->head->data->left != NULL)
+            PushBack(Q, Q->head->data->left);
+        if (Q->head->data->right != NULL)
+            PushBack(Q, Q->head->data->right);
+        PopFront(Q);
+    }
+    free(Q);
+    return min;
+}
+
 int main()
 {
     int t;
@@ -420,7 +449,8 @@ int main()
             }
         }
         long long int min_one = INT_MAX;
-        check_asceding(Head,&min_one);        
+        check_asceding(Head,&min_one);
+        checkLevelOrder(Head);        
         long long int min_two = INT_MAX;
         check_descending(Head,&min_two);
         if(min_one<min_two)
