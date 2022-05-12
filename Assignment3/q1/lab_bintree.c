@@ -6,6 +6,10 @@ tree createBinary(int data)
     T->data = data;
     T->left = NULL;
     T->right = NULL;
+    T->sum =0;
+    T->max_value =0;
+    T->min_value =0;
+    T->isBST = -1;
     return T;
 }
 int max(int a , int b)

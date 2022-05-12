@@ -8,6 +8,10 @@ struct BinTree{
     tree left;
     int data;
     tree right;
+    int isBST;
+    long long int sum;
+    long long int max_value;
+    long long int min_value;
 };
 void PreOrder(tree T);
 void InOrder(tree T);
