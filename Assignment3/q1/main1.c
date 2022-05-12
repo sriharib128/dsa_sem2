@@ -23,36 +23,7 @@ void printLevelOrder(tree Root)
         }
         PopFront(Q);
     }
-}
-
-int isLite(int left,int current , int right)
-{
-    if((left < current) && (current < right))
-        return 1;
-    if((left > current) && (current > right))
-        return 1;
-    return 0;
-}
-
-int Post_Order(tree T,long int * min)
-{
-    if(T== NULL)
-        return 0;
-    else
-    {
-        int left = Post_Order(T->left,min);
-        int right = Post_Order(T->right,min);
-        int current = T->data;
-        if(left ==0 && right == 0)
-            return current;
-        if(isLite(left,current,right))
-        {
-            if((*min)>(left + right + current))
-                *min = left + right + current;
-        }
-        return current;
-    }
-    return 0;
+    free(Q);
 }
 
 void check_asceding(tree current)
@@ -204,14 +175,17 @@ long long int checkLevelOrder(tree Root)
         tree temp = Q->head->data;
         if(temp->sum < min)
             min = temp->sum;
-        temp->isBST=-1;
         temp->sum =0;
+        temp->max_value =0;
+        temp->min_value =0;
+        temp->isBST = -1;
         if (Q->head->data->left != NULL)
             PushBack(Q, Q->head->data->left);
         if (Q->head->data->right != NULL)
             PushBack(Q, Q->head->data->right);
         PopFront(Q);
     }
+    free(Q);
     return min;
 }
 
@@ -279,6 +253,12 @@ int main()
         else
             printf("%lld\n",min_two);
         // printf("-----------------------\n\n");
+        while (Size(Q)!=0)
+        {
+            PopFront(Q);
+        }
+        free(Q);
+        delete(Head);
     }
     return 0;
 }

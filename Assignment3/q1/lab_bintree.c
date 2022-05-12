@@ -24,7 +24,7 @@ void delete(tree T)
 {
     if(T->left==NULL && T->right==NULL)
     {   
-        printf("%d",T->data);
+        // printf("%d",T->data);
         free(T);
     }
     else if(T->left != NULL)

@@ -201,7 +201,7 @@ void delete(tree T)
 {
     if(T->left==NULL && T->right==NULL)
     {   
-        printf("%d",T->data);
+        // printf("%d",T->data);
         free(T);
     }
     else if(T->left != NULL)
@@ -355,7 +355,7 @@ void check_descending(tree current)
 
 long long int checkLevelOrder(tree Head)
 {   
-    long long int min = INT_MAX;
+    long long int min = 2147483647;
     if (Head == NULL)
         return 0;
 
@@ -368,6 +368,8 @@ long long int checkLevelOrder(tree Head)
         if(temp->sum < min)
             min = temp->sum;
         temp->isBST=-1;
+        temp->max_value =0;
+        temp->min_value =0;
         temp->sum =0;
         if (Q->head->data->left != NULL)
             PushBack(Q, Q->head->data->left);
@@ -375,6 +377,7 @@ long long int checkLevelOrder(tree Head)
             PushBack(Q, Q->head->data->right);
         PopFront(Q);
     }
+    free(Q);
     return min;
 }
 
@@ -390,9 +393,9 @@ int main()
         int input=0;
         scanf("%d",&data);
         input++;
-        int depth =0;
+        // int depth =0;
         tree Head = createBinary(data);
-        depth = 1;
+        // depth = 1;
         Dq Q = createStruct();
         PushBack(Q,Head);
         while ((input+2)<=n)
@@ -429,7 +432,7 @@ int main()
                 current->left = temp;
             }
         }
-        long int min = 1e6;
+        // long int min = 1e6;
         // printLevelOrder(Head);
         // printf("-----------------------\n");
         check_asceding(Head);
@@ -442,6 +445,12 @@ int main()
         else
             printf("%lld\n",min_two);
         // printf("-----------------------\n\n");
+        while (Size(Q)!=0)
+        {
+            PopFront(Q);
+        }
+        free(Q);
+        delete(Head);
     }
     return 0;
 }
