@@ -221,33 +221,6 @@ int depth(tree T)
     return 1 + max(depth(T->left),depth(T->right));
 }
 
-
-// void printLevelOrder(tree Root)
-// {
-//     if (Root == NULL)
-//     {
-//         return;
-//     }
-
-//     Dq Q = createStruct();
-//     PushBack(Q, Root);
-
-//     while (isEmpty(Q) != 1)
-//     {
-//         printf("data =%d sum = %lld max =%lld min = %lld\n", Q->head->data->data,Q->head->data->sum,Q->head->data->max_value,Q->head->data->min_value);
-
-//         if (Q->head->data->left != NULL)
-//         {
-//             PushBack(Q, Q->head->data->left);
-//         }
-//         if (Q->head->data->right != NULL)
-//         {
-//             PushBack(Q, Q->head->data->right);
-//         }
-//         PopFront(Q);
-//     }
-// }
-
 void check_asceding(tree current)
 {   
     if(current->left == NULL && current->right == NULL)
@@ -391,7 +364,6 @@ long long int checkLevelOrder(tree Head)
 
     while (isEmpty(Q) != 1)
     {
-        // printf("%d ", Q->head->data->data);
         tree temp = Q->head->data;
         if(temp->sum < min)
             min = temp->sum;

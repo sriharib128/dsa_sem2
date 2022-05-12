@@ -1,4 +1,206 @@
-3
-1 2 3
-3 2 1
-1 3 2
+WA on the following test:
+1
+9
+-3003 -7781 -1786 0 -6701 0 0 0 0 
+Your answer is:
+-14482
+Correct answer is:
+-19271
+WA on the following test:
+1
+9
+-8866 5586 -9747 0 2018 0 0 0 0 
+Your answer is:
+-9747
+Correct answer is:
+-11009
+WA on the following test:
+1
+13
+-6508 0 -4589 -6007 -1102 0 0 -2211 327 0 0 0 0 
+Your answer is:
+-6007
+Correct answer is:
+-20090
+WA on the following test:
+1
+11
+-5850 -8267 -598 0 0 -3557 7718 0 0 0 0 
+Your answer is:
+-8267
+Correct answer is:
+-10554
+WA on the following test:
+1
+9
+-9159 2900 -9165 0 816 0 0 0 0 
+Your answer is:
+-9165
+Correct answer is:
+-14608
+
+
+WA on the following test:
+1
+11
+-7932 0 -2475 -7796 -1513 0 0 0 9682 0 0 
+Your answer is:
+-7796
+Correct answer is:
+-10034
+WA on the following test:
+1
+9
+-3382 1114 -7309 0 0 0 -8626 0 0 
+Your answer is:
+-15935
+Correct answer is:
+-18203
+WA on the following test:
+1
+9
+-3301 -5227 -2817 0 0 0 4045 0 0 
+Your answer is:
+-5227
+Correct answer is:
+-7300
+
+
+WA on the following test:
+1
+13
+-633 -9436 -87 0 -2858 0 0 -8516 -2007 0 0 0 0 
+Your answer is:
+-22817
+Correct answer is:
+-23537
+WA on the following test:
+1
+11
+-7283 -9215 -1916 0 0 -5979 -623 0 0 0 0 
+Your answer is:
+-9215
+Correct answer is:
+-25016
+WA on the following test:
+1
+11
+-4642 0 -4437 -6236 -3468 0 0 0 3448 0 0 
+Your answer is:
+-6236
+Correct answer is:
+-10693
+
+
+WA on the following test:
+1
+9
+-3915 296 -6887 0 -2447 0 0 0 0 
+Your answer is:
+-6887
+Correct answer is:
+-12953
+WA on the following test:
+1
+9
+-990 -273 -6523 0 0 0 -6630 0 0 
+Your answer is:
+-13153
+Correct answer is:
+-14416
+WA on the following test:
+1
+9
+-8623 150 -8854 0 -2492 0 0 0 0 
+Your answer is:
+-8854
+Correct answer is:
+-19819
+
+
+WA on the following test:
+1
+9
+-5681 4887 -6574 0 0 0 -9163 0 0 
+Your answer is:
+-15737
+Correct answer is:
+-16531
+WA on the following test:
+1
+11
+-4012 -1618 -4720 -240 -3193 0 0 0 0 0 0 
+Your answer is:
+-5051
+Correct answer is:
+-13783
+WA on the following test:
+1
+13
+-5533 -7248 -4249 0 0 0 4962 -1956 6326 0 0 0 0 
+Your answer is:
+-7248
+Correct answer is:
+-7698
+
+
+
+WA on the following test:
+1
+9
+-7403 7909 -7764 0 -5120 0 0 0 0 
+Your answer is:
+-7764
+Correct answer is:
+-12378
+WA on the following test:
+1
+11
+-7596 -8581 3380 0 0 -1588 3624 0 0 0 0 
+Your answer is:
+-8581
+Correct answer is:
+-10761
+WA on the following test:
+1
+11
+-6262 -7410 -6164 0 0 -6175 2374 0 0 0 0 
+Your answer is:
+-9965
+Correct answer is:
+-23637
+
+
+
+WA on the following test:
+1
+9
+-8088 -8360 -7804 0 0 0 798 0 0 
+Your answer is:
+-8360
+Correct answer is:
+-23454
+WA on the following test:
+1
+9
+-4958 -7836 213 0 0 0 3847 0 0 
+Your answer is:
+-7836
+Correct answer is:
+-8734
+WA on the following test:
+1
+9
+-5658 -7548 -4039 0 0 0 -3111 0 0 
+Your answer is:
+-7548
+Correct answer is:
+-20356
+WA on the following test:
+1
+11
+-3488 -1081 -8488 0 0 -8264 -9584 0 0 0 0 
+Your answer is:
+-26336
+Correct answer is:
+-30905
