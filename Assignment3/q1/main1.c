@@ -143,7 +143,11 @@ void check_descending(tree current,long long int* min)
                 current->max_value = current->left->max_value;
                 current->sum = current->left->sum + current->data;
                 if(*min>current->sum)
+                {   
+                    tree temp = current;
+                    printf("\t\t > data=%d max_value=%lld min_value = %lld sum = %lld\n",temp->data,temp->max_value,temp->min_value,temp->sum);
                     *min = current->sum;
+                }
             }
             else
                 current->isBST = 0;
@@ -260,14 +264,14 @@ int main()
         
         long long int min_one = INT_MAX;
         check_asceding(Head,&min_one);
-        // checkLevelOrder(Head);
-        // printf("-----------------------\n");
+        checkLevelOrder(Head);
+        printf("-----------------------\n");
         
         long long int min_two = INT_MAX;
         check_descending(Head,&min_two);
-        // checkLevelOrder(Head);
-        // printf("-----------------------\n");
-        // printf("%lld %lld\n",min_one,min_two);
+        checkLevelOrder(Head);
+        printf("-----------------------\n");
+        printf("%lld %lld\n",min_one,min_two);
         if(min_one<min_two)
             printf("%lld\n",min_one);
         else
