@@ -17,5 +17,6 @@ int depth(tree T);
 tree createBinary(char data);
 void delete(tree T);
 void PreOrder_Index(tree T,long int* index);
+void PreOrder_Substring(tree T, char *pre_string);
 #endif
 
