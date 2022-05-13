@@ -63,7 +63,8 @@ struct HashTable *insert(struct HashTable *T, int key)
         temp_item->key = key;
         temp_item->frequency =1;
         temp_item->next = NULL;
-        T->buckets[hash_function].items = temp_item; 
+        T->buckets[hash_function].items = temp_item;
+        insert_operations_count++;
     }
     else
     {
@@ -81,6 +82,7 @@ struct HashTable *insert(struct HashTable *T, int key)
         if(temp_item->key == key)
         {
             temp_item->frequency++;
+            insert_operations_count++;
             return T;
         }
         else
@@ -90,6 +92,7 @@ struct HashTable *insert(struct HashTable *T, int key)
             temp_item_2->frequency =1;
             temp_item_2->next = NULL;
             temp_item->next  = temp_item_2;
+            insert_operations_count++;
         }
     }
     return T;
@@ -102,7 +105,10 @@ int search(struct HashTable *T, int key)
         return 0;
     long int hash_function = (((T->a)*key) + (T->b))%(T->countBucket);
     if(T->buckets[hash_function].items == NULL)
+    {
+        search_operations_count++;
         return 0;
+    }
     else
     {
         struct Item * temp_item = T->buckets[hash_function].items;
@@ -185,8 +191,9 @@ int main( int argc, char *argv[])
     f[0] = fopen(argv[1],"w");
     int a = 1;
     int b = 2;
-    int temp_file_no=argc -1;
-    while(temp_file_no!=1)
+    // int temp_file_no=argc -1;
+    int temp_file_no = 2;    
+    while(temp_file_no<argc)
     {
         int countBucket_array[4]={2,5,10,20};
         int cases = 4;
@@ -215,16 +222,17 @@ int main( int argc, char *argv[])
             }
             // printf("%d ==> %d - %s -%s\n",cases,temp_file_no,f[temp_file_no],argv[temp_file_no]);
             fclose(f[temp_file_no]);
-            printf("==> no of buckets = %d && input = %s\n\t > insert_calls = %lld insert_operations = %lld  avg_per_call = %lld\n",countBucket_array[cases],argv[temp_file_no],insert_call_count,insert_operations_count,(insert_operations_count/insert_call_count));
-            printf("\t > search_calls = %lld search_operations = %lld  avg_per_call = %lld\n",search_call_count,search_operations_count,search_operations_count/search_call_count);
+            fprintf(f[0],"==> no of buckets = %d && input = %s\n\t > insert_calls = %lld insert_operations = %lld  avg_per_call = %lld\n",countBucket_array[cases],argv[temp_file_no],insert_call_count,insert_operations_count,(insert_operations_count/insert_call_count));
+            fprintf(f[0],"\t > search_calls = %lld search_operations = %lld  avg_per_call = %lld\n",search_call_count,search_operations_count,search_operations_count/search_call_count);
             insert_call_count=0;
             insert_operations_count=0;
             search_call_count=0;
             search_operations_count=0;
-            printf("\n------------------------------------\n");
+            fprintf(f[0],"\n");
         }
-        temp_file_no--;
-        printf("****************************************\n\n\n");
+        temp_file_no++;
+        fprintf(f[0],"\n**********************************************************************************************************************\n\n");
     }
+    fclose(f[0]);
     return 0;
 }
