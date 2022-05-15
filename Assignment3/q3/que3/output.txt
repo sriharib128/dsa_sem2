@@ -150,21 +150,21 @@
 
 **********************************************************************************************************************
 
-==> no of buckets = 20 && input = in8.txt
-	 > insert_calls = 75004 insert_operations = 3653652  avg_per_call = 48
-	 > search_calls = 12578 search_operations = 624921  avg_per_call = 49
+==> no of buckets = 20 && input = in9.txt
+	 > insert_calls = 75844 insert_operations = 167178  avg_per_call = 2
+	 > search_calls = 15034 search_operations = 45364  avg_per_call = 3
 
-==> no of buckets = 10 && input = in8.txt
-	 > insert_calls = 75004 insert_operations = 7341523  avg_per_call = 97
-	 > search_calls = 12578 search_operations = 1243746  avg_per_call = 98
+==> no of buckets = 10 && input = in9.txt
+	 > insert_calls = 75844 insert_operations = 349128  avg_per_call = 4
+	 > search_calls = 15034 search_operations = 83066  avg_per_call = 5
 
-==> no of buckets = 5 && input = in8.txt
-	 > insert_calls = 75004 insert_operations = 14725310  avg_per_call = 196
-	 > search_calls = 12578 search_operations = 2483820  avg_per_call = 197
+==> no of buckets = 5 && input = in9.txt
+	 > insert_calls = 75844 insert_operations = 724030  avg_per_call = 9
+	 > search_calls = 15034 search_operations = 158682  avg_per_call = 10
 
-==> no of buckets = 2 && input = in8.txt
-	 > insert_calls = 75004 insert_operations = 36874941  avg_per_call = 491
-	 > search_calls = 12578 search_operations = 6198948  avg_per_call = 492
+==> no of buckets = 2 && input = in9.txt
+	 > insert_calls = 75844 insert_operations = 1860133  avg_per_call = 24
+	 > search_calls = 15034 search_operations = 386137  avg_per_call = 25
 
 
 **********************************************************************************************************************

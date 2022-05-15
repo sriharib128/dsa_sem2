@@ -16,5 +16,5 @@ void PostOrder(tree T);
 int depth(tree T);
 tree createBinary(long long int data);
 void createBakul(tree T,tree head,long long int ct);
-void delete(tree T);
+void Delete(tree T);
 #endif
