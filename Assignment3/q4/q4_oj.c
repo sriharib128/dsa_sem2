@@ -61,20 +61,6 @@ int depth(tree T)
     return 1 + max(depth(T->left),depth(T->right));
 }
 
-void PreOrder_Index(tree T,long int* index)
-{
-    if(T== NULL)
-        return;
-    else
-    {
-        T->index = *index;
-        *index = *index + 1;
-        // printf("%c-%ld\t",T->data,T->index);
-        PreOrder_Index(T->left,index);
-        PreOrder_Index(T->right,index);
-    }
-    return;
-}
 void PreOrder(tree T)
 {
     if(T== NULL)
@@ -112,35 +98,6 @@ void InOrder(tree T)
     return;
 }
 
-
-// int ifBST(tree root)
-// {
-//     if(root == NULL)
-//         return 1;
-//     int flag = 1;
-//     if(root->left != NULL && )
-
-// }
-
-// int main ()
-// {
-//     tree root = createBinary(2);
-    
-//     PreOrder_input(root);
-//     printf("\n\n");
-    
-//     PreOrder(root);
-//     printf("\n");
-    
-//     InOrder(root);
-//     printf("\n");
-    
-//     PostOrder(root);
-//     return 0;
-// }
-
-// #include "bintree.h"
-
 void PreOrder_Substring(tree T, char *pre_string)
 {
     if (T == NULL)
@@ -156,9 +113,23 @@ void PreOrder_Substring(tree T, char *pre_string)
     return;
 }
 
+void PreOrder_Index(tree T,long int* index)
+{
+    if(T== NULL)
+        return;
+    else
+    {
+        T->index = *index;
+        *index = *index + 1;
+        // printf("%c-%ld\t",T->data,T->index);
+        PreOrder_Index(T->left,index);
+        PreOrder_Index(T->right,index);
+    }
+    return;
+}
+
 int main()
 {
-    // printf("HI\n");
     long int N;
     scanf("%ld", &N);
     tree array[N + 1];
@@ -181,7 +152,9 @@ int main()
     }
     long int index = 0;
     PreOrder_Index(array[0], &index);
-    // printf("--\n");
+    char pre_string[1000010];
+    pre_string[0] = '\0';
+    PreOrder_Substring(array[0], pre_string);
     char s[1000010];
     scanf("%s", s);
     long int Q;
@@ -195,24 +168,14 @@ int main()
             long int I;
             scanf("%ld", &I);
             char c;
-            // char temp;
             scanf(" %c", &c);
-            // scanf(" %c",&temp);
-            array[I - 1]->data = c;
-            index = 0;
-            // PreOrder(array[0],&index);
-            // printf("--\n");
+            pre_string[array[I-1]->index] = c;
         }
         else if (t == 2)
         {
             long int L, R, I;
             scanf("%ld %ld %ld", &L, &R, &I);
-
-            char pre_string[1000010];
-            pre_string[0] = '\0';
-            PreOrder_Substring(array[I - 1], pre_string);
-            // printf("%s %s\n",substring,pre_string);
-            if (strncmp(&s[L - 1], &pre_string[0], R - L + 1) == 0)
+            if (strncmp(&s[L - 1], &pre_string[array[I-1]->index], R - L + 1) == 0)
                 printf("YES\n");
             else
                 printf("NO\n");

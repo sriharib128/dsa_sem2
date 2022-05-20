@@ -40,20 +40,20 @@ int depth(tree T)
     return 1 + max(depth(T->left),depth(T->right));
 }
 
-void PreOrder_Index(tree T,long int* index)
-{
-    if(T== NULL)
-        return;
-    else
-    {
-        T->index = *index;
-        *index = *index + 1;
-        // printf("%c-%ld\t",T->data,T->index);
-        PreOrder_Index(T->left,index);
-        PreOrder_Index(T->right,index);
-    }
-    return;
-}
+// void PreOrder_Index(tree T,long int* index)
+// {
+//     if(T== NULL)
+//         return;
+//     else
+//     {
+//         T->index = *index;
+//         *index = *index + 1;
+//         // printf("%c-%ld\t",T->data,T->index);
+//         PreOrder_Index(T->left,index);
+//         PreOrder_Index(T->right,index);
+//     }
+//     return;
+// }
 void PreOrder(tree T)
 {
     if(T== NULL)
