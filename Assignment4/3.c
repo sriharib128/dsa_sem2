@@ -20,7 +20,8 @@ int main()
         prefix[i]=prefix[i+1]+A[i];
     long long int result =prefix[0];
 
-    qsort(&prefix[1], n-1, sizeof(long long int), cmpfunc);
+    if(n>1)
+        qsort(&prefix[1], n-1, sizeof(long long int), cmpfunc);
     
     int n_element=0;
     for(int i=n-1;i>=0;i--)
