@@ -79,3 +79,9 @@ int main()
     }
     return 0;
 }
+/*
+1 1 1 1 2 2 2 2 3 4 5 6 
+12 12 12 12     3 4 5 6 
+n-max_freq*count;
+elements/(max_freq-1) + count-1;
+*/
