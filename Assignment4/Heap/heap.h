@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 typedef int ElementType;
 typedef struct HeapStruct* heap;//Priority Queue
@@ -14,10 +15,10 @@ struct HeapStruct
     ElementType *Elements;
 };
 
-heap Initialize(int MaxElemets);
+heap Initialize(int MaxElements);
 void destroy(heap H);
 void MakeEmpty(heap H);
-void Insert(heap H);
+void Insert(heap H,ElementType a);
 ElementType DeleteMin(heap H);
 ElementType FindMin (heap H);
 int IsEmpty(heap H);
