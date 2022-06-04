@@ -23,5 +23,6 @@ ElementType DeleteMin(heap H);
 ElementType FindMin (heap H);
 int IsEmpty(heap H);
 int IsFull(heap H);
-
+void printHeap(heap H);
+void AdjustHeap(heap H, int pos);
 #endif
