@@ -25,4 +25,5 @@ int IsEmpty(heap H);
 int IsFull(heap H);
 void printHeap(heap H);
 void AdjustHeap(heap H, int pos);
+void swap(ElementType* a, ElementType* B);
 #endif
