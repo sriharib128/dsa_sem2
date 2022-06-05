@@ -20,7 +20,7 @@ void swap(ElementType* a, ElementType* b)
     *a = *b;
     *b = temp;
 }
-heap Initialize(int MaxElements)
+heap CreateHeap(int MaxElements)
 {
     heap H = (heap)malloc(sizeof(struct HeapStruct ));
     H->Capacity = MaxElements+1;
@@ -28,7 +28,10 @@ heap Initialize(int MaxElements)
     H->Size = 0;
     return H;
 }
-
+int SizeOfHeap(heap H)
+{
+    return (H->Size);
+}
 void Insert(heap H,ElementType a)
 {
     int i = H->Size;

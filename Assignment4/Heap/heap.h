@@ -18,13 +18,13 @@ struct HeapStruct
 ElementType minimum(ElementType a, ElementType b);
 ElementType maximum(ElementType a, ElementType b);
 
-heap Initialize(int MaxElements);
+heap CreateHeap(int MaxElements);
 void Insert(heap H,ElementType a);
 void AdjustHeap(heap H, int pos);
 ElementType DeleteMin(heap H);
 void printHeap(heap H);
 void swap(ElementType* a, ElementType* B);
-
+int SizeOfHeap(heap H);
 // void destroy(heap H);
 // void MakeEmpty(heap H);
 // ElementType FindMin (heap H);
