@@ -26,20 +26,15 @@ heap Initialize(int MaxElements)
     H->Capacity = MaxElements+1;
     H->Elements = (ElementType *)malloc(sizeof(ElementType)*(MaxElements+1));
     H->Size = 0;
-    // H->Elements[0]= INT_MAX;
     return H;
 }
 
 void Insert(heap H,ElementType a)
 {
-    int i;
-    if(H->Size==0)
+    int i = H->Size;
+
+    if(H->Size!=0)
     {
-        i=0;
-    }
-    else
-    {
-        i = H->Size;
         while(H->Elements[(i-1)/2]>=a)
         {
             H->Elements[i]=H->Elements[(i-1)/2];
@@ -57,16 +52,16 @@ void AdjustHeap(heap H, int pos)
 {
     if( (2*pos +2) >(H->Size-1))
     {
-        if( (2*pos +1) >(H->Size-1))//LAST NODE HAS NO CHILD
+        if( (2*pos +1) >(H->Size-1))//NODE HAS NO CHILD
             return;
-        else // LAST NODE HAS ONE CHILD ONLY
+        else // NODE HAS ONE CHILD ONLY
         {
             if(H->Elements[pos]>H->Elements[2*pos +1])
                 swap( &H->Elements[pos], &H->Elements[2*pos +1]);
             return;
         }
     }
-    else
+    else//NODE HAS TWO CHILDREN
     {
         if(H->Elements[pos]>minimum(H->Elements[2*pos +2],H->Elements[2*pos +1]))
         {
@@ -91,26 +86,16 @@ ElementType DeleteMin(heap H)
 {
     if(H->Size==0)
         return INT_MIN;
-    ElementType min;
-    if(H->Size==1)
-    {
-        min = H->Elements[0];
-        H->Size--;
-        return min;
-    }
-    else if(H->Size >=2)
+    ElementType min=H->Elements[0];
+    if(H->Size >=2)
     {   
-        // printf("[Size=%d , %d]",H->Size,H->Elements[H->Size-1]);
-        min = H->Elements[0];
-        H->Elements[0]=H->Elements[H->Size-1];//effectively creating a hole and pecolating it down
+        H->Elements[0]=H->Elements[H->Size-1];
+        //adding last element in the hole and percolating it down
         H->Elements[H->Size-1]= INT_MAX;
-        // printHeap(H);
         AdjustHeap(H,0);
-        // printHeap(H);
-        H->Size--;
-        return min;
     }
-    
+    H->Size--;
+    return min;
 }
 
 void printHeap(heap H)
@@ -120,32 +105,32 @@ void printHeap(heap H)
     {
         printf("%d ",H->Elements[i]);
     }
-    // printf("\n");
+    printf("\n");
 }
 
-// int main()
-// {
-//     int A[]={1,-1,2,4};
-//     int elements = sizeof(A)/sizeof(int);
-//     heap H = Initialize(elements);
-//     for(int i=0;i<elements;i++)
-//     {
-//         Insert(H,A[i]);
-//         printHeap(H);
-//         printf("\n");
-//     }
-//     printf("------------------------------------\n");
-//     printf("------------------------------------\n");
-//     while ((H->Size>0))
-//     {
-//         printHeap(H);
-//         printf(" ==>%d==> ",DeleteMin(H));
-//         printHeap(H);
-//         printf("\n");
-//     }
-//     printHeap(H);
-//         printf(" ==>%d==> ",DeleteMin(H));
-//         printHeap(H);
-//         printf("\n");
-//     return 0;
-// }
+int main()
+{
+    int A[]={1,-1,2,4};
+    int elements = sizeof(A)/sizeof(int);
+    heap H = Initialize(elements);
+    for(int i=0;i<elements;i++)
+    {
+        Insert(H,A[i]);
+        printHeap(H);
+        printf("\n");
+    }
+    printf("------------------------------------\n");
+    printf("------------------------------------\n");
+    while ((H->Size>0))
+    {
+        printHeap(H);
+        printf(" ==>%d==> ",DeleteMin(H));
+        printHeap(H);
+        printf("\n");
+    }
+    printHeap(H);
+        printf(" ==>%d==> ",DeleteMin(H));
+        printHeap(H);
+        printf("\n");
+    return 0;
+}
