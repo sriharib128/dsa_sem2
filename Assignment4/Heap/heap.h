@@ -15,15 +15,19 @@ struct HeapStruct
     ElementType *Elements;
 };
 
+ElementType minimum(ElementType a, ElementType b);
+ElementType maximum(ElementType a, ElementType b);
+
 heap Initialize(int MaxElements);
-void destroy(heap H);
-void MakeEmpty(heap H);
 void Insert(heap H,ElementType a);
-ElementType DeleteMin(heap H);
-ElementType FindMin (heap H);
-int IsEmpty(heap H);
-int IsFull(heap H);
-void printHeap(heap H);
 void AdjustHeap(heap H, int pos);
+ElementType DeleteMin(heap H);
+void printHeap(heap H);
 void swap(ElementType* a, ElementType* B);
+
+// void destroy(heap H);
+// void MakeEmpty(heap H);
+// ElementType FindMin (heap H);
+// int IsEmpty(heap H);
+// int IsFull(heap H);
 #endif

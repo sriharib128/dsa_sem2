@@ -105,32 +105,28 @@ void printHeap(heap H)
     {
         printf("%d ",H->Elements[i]);
     }
-    printf("\n");
+    // printf("\n");
 }
 
-int main()
-{
-    int A[]={1,-1,2,4};
-    int elements = sizeof(A)/sizeof(int);
-    heap H = Initialize(elements);
-    for(int i=0;i<elements;i++)
-    {
-        Insert(H,A[i]);
-        printHeap(H);
-        printf("\n");
-    }
-    printf("------------------------------------\n");
-    printf("------------------------------------\n");
-    while ((H->Size>0))
-    {
-        printHeap(H);
-        printf(" ==>%d==> ",DeleteMin(H));
-        printHeap(H);
-        printf("\n");
-    }
-    printHeap(H);
-        printf(" ==>%d==> ",DeleteMin(H));
-        printHeap(H);
-        printf("\n");
-    return 0;
-}
+// int main()
+// {
+//     int A[]={1,-1,2,4,-2};
+//     int elements = sizeof(A)/sizeof(int);
+//     heap H = Initialize(elements);
+//     for(int i=0;i<elements;i++)
+//     {
+//         Insert(H,A[i]);
+//         printHeap(H);
+//         printf("\n");
+//     }
+//     printf("------------------------------------\n");
+//     printf("------------------------------------\n");
+//     while ((H->Size>0))
+//     {
+//         printHeap(H);
+//         printf(" ==> %d ==> ",DeleteMin(H));
+//         printHeap(H);
+//         printf("\n");
+//     }
+//     return 0;
+// }
