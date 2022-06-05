@@ -13,7 +13,12 @@ ElementType maximum(ElementType a, ElementType b)
         return a;
     return b;
 }
-
+ElementType FindMin (heap H)
+{
+    if(H->Size==0)
+        return INT_MIN;
+    return H->Elements[0];
+}
 void swap(ElementType* a, ElementType* b)
 {
     ElementType temp = *a;

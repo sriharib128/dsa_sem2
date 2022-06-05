@@ -25,9 +25,10 @@ ElementType DeleteMin(heap H);
 void printHeap(heap H);
 void swap(ElementType* a, ElementType* B);
 int SizeOfHeap(heap H);
+ElementType FindMin (heap H);
+
 // void destroy(heap H);
 // void MakeEmpty(heap H);
-// ElementType FindMin (heap H);
 // int IsEmpty(heap H);
 // int IsFull(heap H);
 #endif
