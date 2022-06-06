@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-typedef int ElementType;
+typedef long long int* ElementType;
 typedef struct HeapStruct* heap;//Priority Queue
 
 struct HeapStruct

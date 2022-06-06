@@ -2,21 +2,21 @@
 
 ElementType minimum(ElementType a, ElementType b)
 {
-    if(a>=b)
+    if(a[0]>=b[0])
         return b;
     return a;
 }
 
 ElementType maximum(ElementType a, ElementType b)
 {
-    if(a>=b)
+    if(a[0]>=b[0])
         return a;
     return b;
 }
 ElementType FindMin (heap H)
 {
     if(H->Size==0)
-        return INT_MIN;
+        return NULL;
     return H->Elements[0];
 }
 void swap(ElementType* a, ElementType* b)
@@ -33,6 +33,7 @@ heap CreateHeap(int MaxElements)
     H->Size = 0;
     return H;
 }
+
 int SizeOfHeap(heap H)
 {
     return (H->Size);
@@ -43,7 +44,7 @@ void Insert(heap H,ElementType a)
 
     if(H->Size!=0)
     {
-        while(H->Elements[(i-1)/2]>=a)
+        while(H->Elements[(i-1)/2][0]>=a[0])
         {
             H->Elements[i]=H->Elements[(i-1)/2];
             i=(i-1)/2;
@@ -64,16 +65,16 @@ void AdjustHeap(heap H, int pos)
             return;
         else // NODE HAS ONE CHILD ONLY
         {
-            if(H->Elements[pos]>H->Elements[2*pos +1])
+            if(H->Elements[pos][0]>H->Elements[2*pos +1][0])
                 swap( &H->Elements[pos], &H->Elements[2*pos +1]);
             return;
         }
     }
     else//NODE HAS TWO CHILDREN
     {
-        if(H->Elements[pos]>minimum(H->Elements[2*pos +2],H->Elements[2*pos +1]))
+        if(H->Elements[pos][0]>minimum(H->Elements[2*pos +2],H->Elements[2*pos +1])[0])
         {
-            if(H->Elements[2*pos +2] > H->Elements[2*pos +1])
+            if(H->Elements[2*pos +2][0] > H->Elements[2*pos +1][0])
             {
                 swap( &H->Elements[pos], &H->Elements[2*pos +1]);
                 AdjustHeap(H,(2*pos +1));
@@ -92,17 +93,22 @@ void AdjustHeap(heap H, int pos)
 
 ElementType DeleteMin(heap H)
 {
+    // printf("\n\t\t >Before DELETE MIN \n");
+    // printHeap(H);
     if(H->Size==0)
-        return INT_MIN;
+        return NULL;
     ElementType min=H->Elements[0];
     if(H->Size >=2)
     {   
         H->Elements[0]=H->Elements[H->Size-1];
         //adding last element in the hole and percolating it down
-        H->Elements[H->Size-1]= INT_MAX;
+        // H->Elements[H->Size-1][0]= INT_MAX;
         AdjustHeap(H,0);
     }
     H->Size--;
+    // printf("==> ");
+    // printHeap(H);
+    // printf("\n\t\t > After DeleteMin\n");
     return min;
 }
 
@@ -111,7 +117,7 @@ void printHeap(heap H)
     printf(" ( %d %d ) ",H->Capacity,H->Size);
     for(int i=0;i<H->Size;i++ )
     {
-        printf("%d ",H->Elements[i]);
+        printf("%d_i(%d)_j(%d) ",H->Elements[i][0],H->Elements[i][1],H->Elements[i][2]);
     }
     // printf("\n");
 }
