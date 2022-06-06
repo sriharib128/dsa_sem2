@@ -22,7 +22,6 @@ int main()
         int k;
         scanf("%d",&k);
         int A[k][k];
-        long long int MINSUM =0;
         for(int i=0;i<k;i++)
         {
             for(int j=0;j<k;j++)
@@ -43,7 +42,7 @@ int main()
         int* array1 = &A[0][0];
         int* array2 = &A[1][0];
 
-        long long int  array3[k];
+        int  array3[k];
         int s =2;//section
         while(s<=k)
         {
@@ -62,8 +61,7 @@ int main()
             MAP[0][0] = 1;
 
             int count =0;
-            int flag =1;
-            while(count <k && flag !=0)
+            while(count <k && SizeOfHeap(H) >=1)
             {
                 long long int * temp  = DeleteMin(H);
                 array3[count++]=temp[0];
@@ -72,7 +70,6 @@ int main()
                 free(temp);
                 // printf("%d(%d) + %d(%d) = %d(%d)\n",array1[i],i,array2[j],j,array3[count-1],count-1);
                 // printf("--------------\n");
-                flag =0;
                 if(i+1<k)
                 {   
                     long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
@@ -85,7 +82,6 @@ int main()
                         Insert(H,pair);
                         MAP[i+1][j]=1;
                     }
-                    flag =1;
                 }
                 if(j+1 < k)
                 {   
@@ -99,7 +95,6 @@ int main()
                         MAP[i][j+1]=1;
                         Insert(H,pair);
                     }
-                    flag=1;
                 }
             }
             
@@ -112,7 +107,7 @@ int main()
             array2 = A[s++];
         }
         for(int i=0;i<k;i++)
-            printf("%lld ",array3[i]);
+            printf("%d ",array3[i]);
         printf("\n");
     }
     return 0;   

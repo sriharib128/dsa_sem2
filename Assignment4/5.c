@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-typedef int ElementType;
+typedef long long int* ElementType;
 typedef struct HeapStruct* heap;//Priority Queue
 
 struct HeapStruct
@@ -26,8 +26,7 @@ void printHeap(heap H);
 void swap(ElementType* a, ElementType* B);
 int SizeOfHeap(heap H);
 ElementType FindMin (heap H);
-
-// void destroy(heap H);
+void destroy(heap H);
 // void MakeEmpty(heap H);
 // int IsEmpty(heap H);
 // int IsFull(heap H);
@@ -37,21 +36,21 @@ ElementType FindMin (heap H);
 
 ElementType minimum(ElementType a, ElementType b)
 {
-    if(a>=b)
+    if(a[0]>=b[0])
         return b;
     return a;
 }
 
 ElementType maximum(ElementType a, ElementType b)
 {
-    if(a>=b)
+    if(a[0]>=b[0])
         return a;
     return b;
 }
 ElementType FindMin (heap H)
 {
     if(H->Size==0)
-        return INT_MIN;
+        return NULL;
     return H->Elements[0];
 }
 void swap(ElementType* a, ElementType* b)
@@ -68,6 +67,11 @@ heap CreateHeap(int MaxElements)
     H->Size = 0;
     return H;
 }
+void destroy(heap H)
+{
+    free(H->Elements);
+    free(H);
+}
 int SizeOfHeap(heap H)
 {
     return (H->Size);
@@ -78,7 +82,7 @@ void Insert(heap H,ElementType a)
 
     if(H->Size!=0)
     {
-        while(H->Elements[(i-1)/2]>=a)
+        while(H->Elements[(i-1)/2][0]>=a[0])
         {
             H->Elements[i]=H->Elements[(i-1)/2];
             i=(i-1)/2;
@@ -99,16 +103,16 @@ void AdjustHeap(heap H, int pos)
             return;
         else // NODE HAS ONE CHILD ONLY
         {
-            if(H->Elements[pos]>H->Elements[2*pos +1])
+            if(H->Elements[pos][0]>H->Elements[2*pos +1][0])
                 swap( &H->Elements[pos], &H->Elements[2*pos +1]);
             return;
         }
     }
     else//NODE HAS TWO CHILDREN
     {
-        if(H->Elements[pos]>minimum(H->Elements[2*pos +2],H->Elements[2*pos +1]))
+        if(H->Elements[pos][0]>minimum(H->Elements[2*pos +2],H->Elements[2*pos +1])[0])
         {
-            if(H->Elements[2*pos +2] > H->Elements[2*pos +1])
+            if(H->Elements[2*pos +2][0] > H->Elements[2*pos +1][0])
             {
                 swap( &H->Elements[pos], &H->Elements[2*pos +1]);
                 AdjustHeap(H,(2*pos +1));
@@ -128,28 +132,28 @@ void AdjustHeap(heap H, int pos)
 ElementType DeleteMin(heap H)
 {
     if(H->Size==0)
-        return INT_MIN;
+        return NULL;
     ElementType min=H->Elements[0];
     if(H->Size >=2)
     {   
         H->Elements[0]=H->Elements[H->Size-1];
-        //adding last element in the hole and percolating it down
-        H->Elements[H->Size-1]= INT_MAX;
         AdjustHeap(H,0);
     }
     H->Size--;
     return min;
 }
 
-void printHeap(heap H)
-{
-    printf(" ( %d %d ) ",H->Capacity,H->Size);
-    for(int i=0;i<H->Size;i++ )
-    {
-        printf("%d ",H->Elements[i]);
-    }
-    // printf("\n");
-}
+// void printHeap(heap H)
+// {
+//     printf(" ( %d %d ) ",H->Capacity,H->Size);
+//     for(int i=0;i<H->Size;i++ )
+//     {
+//         printf("%d_i(%d)_j(%d) ",H->Elements[i][0],H->Elements[i][1],H->Elements[i][2]);
+//     }
+//     // printf("\n");
+// }
+
+// #include "heap.h"
 
 int compare (const void * a, const void * b) 
 {
@@ -163,6 +167,7 @@ int compare (const void * a, const void * b)
    else
         return (-1);
 }
+
 int main()
 {
     int t;
@@ -172,19 +177,12 @@ int main()
         int k;
         scanf("%d",&k);
         int A[k][k];
-        heap H[k];
-        for(int i =0;i<k;i++ )
-        {
-            H[i]=CreateHeap(k);
-        }
-        long long int MINSUM =0;
         for(int i=0;i<k;i++)
         {
             for(int j=0;j<k;j++)
             {
                 int temp;
                 scanf("%d",&temp);
-                Insert(H[i],temp);
                 A[i][j]=temp;
             }
             qsort(&A[i][0],k,sizeof(int),compare);
@@ -193,30 +191,78 @@ int main()
             //     printf("%d ",A[i][j]);
             // }
             // printf("\n");
-            MINSUM = MINSUM + DeleteMin(H[i]);
         }
-        // printf("===\n");
-        printf("%lld ",MINSUM);
-        int no_of_purchases =1;
-        while(no_of_purchases<k)
-        {   
-            long long int temp_maxsum = MINSUM;
-            int min = INT_MAX;
-            int min_pos =-1;
+        
+
+        int* array1 = &A[0][0];
+        int* array2 = &A[1][0];
+
+        int  array3[k];
+        int s =2;//section
+        while(s<=k)
+        {
+            heap H = CreateHeap(k*k);
+            int MAP[k][k];
+            
             for(int i=0;i<k;i++)
+                for(int j=0;j<k;j++)
+                    MAP[i][j]=0;
+
+            long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
+            pair[0]=array1[0]+array2[0];
+            pair[1]=0;
+            pair[2]=0;
+            Insert(H,pair);
+            MAP[0][0] = 1;
+
+            int count =0;
+            while(count <k && SizeOfHeap(H) >=1)
             {
-                long long int temp_min = FindMin(H[i]) - A[i][0];
-                if(temp_min<min)
-                {
-                    min = temp_min;
-                    min_pos = i;
+                long long int * temp  = DeleteMin(H);
+                array3[count++]=temp[0];
+                int i= temp[1];
+                int j= temp[2];
+                free(temp);
+                // printf("%d(%d) + %d(%d) = %d(%d)\n",array1[i],i,array2[j],j,array3[count-1],count-1);
+                // printf("--------------\n");
+                if(i+1<k)
+                {   
+                    long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
+                    pair[0]=array1[i+1]+array2[j];
+                    pair[1]=i+1;
+                    pair[2]=j;
+
+                    if(MAP[i+1][j]==0)
+                    {   
+                        Insert(H,pair);
+                        MAP[i+1][j]=1;
+                    }
+                }
+                if(j+1 < k)
+                {   
+                    long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
+                    pair[0]=array1[i]+array2[j+1];
+                    pair[1]=i;
+                    pair[2]=j+1;
+
+                    if(MAP[i][j+1]==0)
+                    {
+                        MAP[i][j+1]=1;
+                        Insert(H,pair);
+                    }
                 }
             }
-            // printf("i=%d => %d",min_pos,FindMin(H[min_pos]));
-            temp_maxsum = MINSUM - A[min_pos][0] +DeleteMin(H[min_pos]);
-            printf("%lld ",temp_maxsum);
-            no_of_purchases++;
+            
+            // printf("\n");
+            destroy(H);
+            for(int i=0;i<k;i++)
+            {
+                array1[i]=array3[i];
+            }
+            array2 = A[s++];
         }
+        for(int i=0;i<k;i++)
+            printf("%d ",array3[i]);
         printf("\n");
     }
     return 0;   
