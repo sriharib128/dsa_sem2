@@ -29,16 +29,14 @@ int main()
             {
                 int temp;
                 scanf("%d",&temp);
-                // Insert(H[i],temp);
                 A[i][j]=temp;
             }
             qsort(&A[i][0],k,sizeof(int),compare);
-            for(int j=0;j<k;j++)
-            {
-                printf("%d ",A[i][j]);
-            }
-            printf("\n");
-            // MINSUM = MINSUM + DeleteMin(H[i]);
+            // for(int j=0;j<k;j++)
+            // {
+            //     printf("%d ",A[i][j]);
+            // }
+            // printf("\n");
         }
         
 
@@ -46,68 +44,75 @@ int main()
         int* array2 = &A[1][0];
 
         long long int  array3[k];
-
-        heap H = CreateHeap(k*k);
-        int MAP[k][k];
-        
-        for(int i=0;i<k;i++)
-            for(int j=0;j<k;j++)
-                MAP[i][j]=0;
-
-        int s =0;//section
-
-        long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
-        pair[0]=array1[0]+array2[0];
-        pair[1]=0;
-        pair[2]=0;
-        Insert(H,pair);
-        MAP[0][0] = 1;
-
-        int count =0;
-        int flag =1;
-        while(count <k && flag !=0)
+        int s =2;//section
+        while(s<=k)
         {
-            long long int * temp  = DeleteMin(H);
-            array3[count++]=temp[0];
-            int i= temp[1];
-            int j= temp[2];
-            free(temp);
-            printf("%d(%d) + %d(%d) = %d(%d)\n",array1[i],i,array2[j],j,array3[count-1],count-1);
-            printf("--------------\n");
-            flag =0;
-            if(i+1<k)
-            {   
-                long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
-                pair[0]=array1[i+1]+array2[j];
-                pair[1]=i+1;
-                pair[2]=j;
+            heap H = CreateHeap(k*k);
+            int MAP[k][k];
+            
+            for(int i=0;i<k;i++)
+                for(int j=0;j<k;j++)
+                    MAP[i][j]=0;
 
-                if(MAP[i+1][j]==0)
+            long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
+            pair[0]=array1[0]+array2[0];
+            pair[1]=0;
+            pair[2]=0;
+            Insert(H,pair);
+            MAP[0][0] = 1;
+
+            int count =0;
+            int flag =1;
+            while(count <k && flag !=0)
+            {
+                long long int * temp  = DeleteMin(H);
+                array3[count++]=temp[0];
+                int i= temp[1];
+                int j= temp[2];
+                free(temp);
+                // printf("%d(%d) + %d(%d) = %d(%d)\n",array1[i],i,array2[j],j,array3[count-1],count-1);
+                // printf("--------------\n");
+                flag =0;
+                if(i+1<k)
                 {   
-                    Insert(H,pair);
-                    MAP[i+1][j]=1;
+                    long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
+                    pair[0]=array1[i+1]+array2[j];
+                    pair[1]=i+1;
+                    pair[2]=j;
+
+                    if(MAP[i+1][j]==0)
+                    {   
+                        Insert(H,pair);
+                        MAP[i+1][j]=1;
+                    }
+                    flag =1;
                 }
-                flag =1;
-            }
-            if(j+1 < k)
-            {   
-                long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
-                pair[0]=array1[i]+array2[j+1];
-                pair[1]=i;
-                pair[2]=j+1;
-                // printf("SUM=%d i=%d j=%d",pair[0],pair[1],pair[2]);
+                if(j+1 < k)
+                {   
+                    long long int *pair = (long long int *)malloc(sizeof(long long int)*3);
+                    pair[0]=array1[i]+array2[j+1];
+                    pair[1]=i;
+                    pair[2]=j+1;
 
-                if(MAP[i][j+1]==0)
-                {
-                    // printf("==> inserted\n");
-
-                    MAP[i][j+1]=1;
-                    Insert(H,pair);
+                    if(MAP[i][j+1]==0)
+                    {
+                        MAP[i][j+1]=1;
+                        Insert(H,pair);
+                    }
+                    flag=1;
                 }
-                flag=1;
             }
-
+            
+            // printf("\n");
+            destroy(H);
+            for(int i=0;i<k;i++)
+            {
+                array1[i]=array3[i];
+            }
+            array2 = A[s++];
         }
+        for(int i=0;i<k;i++)
+            printf("%lld ",array3[i]);
         printf("\n");
     }
     return 0;   

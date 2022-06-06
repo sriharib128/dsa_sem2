@@ -33,7 +33,11 @@ heap CreateHeap(int MaxElements)
     H->Size = 0;
     return H;
 }
-
+void destroy(heap H)
+{
+    free(H->Elements);
+    free(H);
+}
 int SizeOfHeap(heap H)
 {
     return (H->Size);
