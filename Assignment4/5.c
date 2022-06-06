@@ -186,11 +186,6 @@ int main()
                 A[i][j]=temp;
             }
             qsort(&A[i][0],k,sizeof(int),compare);
-            // for(int j=0;j<k;j++)
-            // {
-            //     printf("%d ",A[i][j]);
-            // }
-            // printf("\n");
         }
         
 
