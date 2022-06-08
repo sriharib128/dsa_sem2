@@ -16,15 +16,32 @@ void merge(ElementType array[],int start , int mid , int end)
     for(int i=0;i<R_size;i++)
         R[i] = array[mid+1+i];
     
-    // printf("sorting left = ");
+    // merge two sorted arrays
+    int l_index =0;
+    int r_index =0;
+    int a_index = start;
+    while(l_index <L_size && r_index <R_size)
+    {
+        if(*R[r_index] > *L[l_index])
+        {
+            array[a_index++] = L[l_index++];
+        }
+        else
+        {
+            array[a_index++] = R[r_index++];
+        }
+    }
 
-    // for(int i=0;i<L_size;i++)
-    //     printf("%d ",*L[i]);
-    // printf("  and right = ");
-    // for(int i=0;i<R_size;i++)
-    //     printf("%d ",*R[i]);
-    
-    printf("\n");
+    while(r_index<R_size)
+    {
+        array[a_index++] = R[r_index++];
+    }
+
+    while(l_index<L_size)
+    {
+        array[a_index++] = L[l_index++];
+    }
+    return ;
 }
 
 void mergesort(ElementType array[],int start , int end)
@@ -35,14 +52,13 @@ void mergesort(ElementType array[],int start , int end)
         mergesort(array,start,mid);
         mergesort(array,(mid+1),end);
         merge(array,start,mid,end);
-        // printf("======completed merging %d,%d,%d=====",start,mid, end);
     }
     return;
 }
 
 int main()
 {
-    int A[]={0,1,2,-1,-2,5,10};
+    int A[]={0,1,-1};
     int n = sizeof(A)/sizeof(int);
 
     ElementType array[n];
@@ -53,6 +69,6 @@ int main()
 
     mergesort(array,0,n-1);
 
-    // for(int i=0;i<n;i++)
-    //     printf("%d ",A[i]);
+    for(int i=0;i<n;i++)
+        printf("%d ",*array[i]);
 }
