@@ -1,9 +1,13 @@
+// Selection sort ==> best case O(n^2)
+//Quick sort ==> best case O(nLogn)
+
+
 //Assume P-1 elements are already sorted
 // continuously move the elements from p-1 to 0 to the right until u can place pth position
 //  temp = A[p]; 
 //A[i]<temp;
-// Best case ==> O(N);
-// Worst Case ==> O(N^2);
+// Best case ==> O(N); //sorted array;
+// Worst Case ==> O(N^2); //  
 // Avg Case ==> O(N^2);
 
 #include <stdio.h>
