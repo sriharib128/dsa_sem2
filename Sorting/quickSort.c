@@ -10,11 +10,11 @@ void swap(int* a,int* b)
 
 int sort(int A[],int start , int end , int pivot)
 {
-    int pivotindex = start;
+    int pivotindex = start+1;
 
     int temp = A[pivot];
 
-    for(int i=start;i<=end;i++)
+    for(int i=start+1;i<=end;i++)
     {   
         // if(i==pivot)
         //     continue;
@@ -26,7 +26,7 @@ int sort(int A[],int start , int end , int pivot)
         }
 
     }
-    swap(&A[pivot],&A[pivotindex]);
+    swap(&A[pivot],&A[pivotindex-1]);
     return pivotindex;  
 }
 
@@ -35,8 +35,8 @@ void quicksort(int A[],int start , int end)
     if(start<end)
     {
         // int pivot = (start+end)/2;
+        int pivot = start;
         // int pivot = end;
-        int pivot = end;
         sort(A,start,end,pivot);
         quicksort(A,start,pivot-1);
         quicksort(A,pivot+1,end);
