@@ -115,7 +115,9 @@ int main()
         printf("No such user\n");
         continue;
       }
-      song* cur = getCurrentSongUser(users[userIdx]);
+      song * cur =NULL;
+      if(users[userIdx]->P->current!=NULL)
+        cur = getCurrentSongUser(users[userIdx]);
       if(cur == NULL)
         printf("No song playing\n");
       else

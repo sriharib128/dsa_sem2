@@ -61,7 +61,6 @@ int main()
       else
         // SUCCESSFUL OPERATION
         printf("Song %s added successfully\n", name);
-        // printf("%d\n",__LINE__);
     }
     else if(strcmp(command, "REMOVE") == 0)
     {
@@ -76,8 +75,6 @@ int main()
     }
     else if(strcmp(command, "PLAY") == 0)
     {
-      // printf("%d\n",__LINE__);
-
       // PLAY THE SONG
       if(playSong(mp) == 0)
         printf("Playing song\n");
@@ -86,13 +83,10 @@ int main()
     }
     else if(strcmp(command, "GET") == 0)
     {
-      // printf("%d\n",__LINE__);
       // GET THE CURRENT SONG PLAYING
-      song *s;
-      if(mp!=NULL && mp->current!=NULL)
-        s = getCurrentSong(mp);
-      else
-        s=NULL;
+      song* s=NULL;
+      if(mp->current!=NULL) 
+        s= getCurrentSong(mp);
       if(s == NULL)
         printf("No song playing\n");
       else

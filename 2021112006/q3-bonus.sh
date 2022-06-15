@@ -27,7 +27,7 @@ cd ..
 wget https://raw.githubusercontent.com/kjain1810/DSA-Spring-22/master/assignment1/driver_normal.c
 wget https://raw.githubusercontent.com/kjain1810/DSA-Spring-22/master/assignment1/driver_bonus.c
 
-cp 3/driver_normal.c 3/main.c
+cp driver_normal.c 3/main.c
 make
 
 ./q3.out < tests_3/6.in > tests_3/sub_6.out

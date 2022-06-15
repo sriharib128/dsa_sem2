@@ -84,7 +84,9 @@ int main()
     else if(strcmp(command, "GET") == 0)
     {
       // GET THE CURRENT SONG PLAYING
-      song* s = getCurrentSong(mp);
+      song* s=NULL;
+      if(mp->current!=NULL) 
+        s= getCurrentSong(mp);
       if(s == NULL)
         printf("No song playing\n");
       else
