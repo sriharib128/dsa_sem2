@@ -53,7 +53,7 @@ int removeSongFromQueue(Player P , int i)
         P->count=0;
         P->queue_head =NULL;
         P->queue_tail = NULL;
-        P->current = NULL;
+        // P->current = NULL;
     }
     else
     {
@@ -66,16 +66,16 @@ int removeSongFromQueue(Player P , int i)
                 
                 (P->queue_head)->prev = NULL;
                 P->count = P->count -1;
-                if(P->current == a)
-                    P->current = NULL;
+                // if(P->current == a)
+                //     P->current = NULL;
                 free(a);
                 break;
             }
             else if (i==(P->count -1))
             {   
                 Queue temp = P->queue_tail;
-                if(P->current == temp)
-                    P->current = NULL;
+                // if(P->current == temp)
+                //     P->current = NULL;
                 ((P->queue_tail)->prev)->next = NULL;
                 P->queue_tail = (P->queue_tail)->prev;
                 P->count = P->count -1;
@@ -83,8 +83,8 @@ int removeSongFromQueue(Player P , int i)
             }
             else if(i == j)
             {   
-                if(P->current == a)
-                    P->current = NULL;
+                // if(P->current == a)
+                //     P->current = NULL;
                 (a->prev)->next = a->next;
                 (a->next)->prev = a->prev;
                 P->count = P->count -1;
@@ -103,19 +103,15 @@ int playSong(Player P)
 {
     if(P->queue_head == NULL)
         return 1;
-    if(P->current == NULL)
-    {
-        P->current = (P->queue_head);
-    }
-    else
-    {
-        removeSongFromQueue(P,0);
-        P->current = (P->queue_head);
-    }
+    P->current = (Queue)malloc(sizeof(struct _queue));
+    P->current->song=P->queue_head->song;
+    removeSongFromQueue(P,0);
     return 0;
 }
 
 Song_p getCurrentSong(Player P)
 {
+    if(P->current==NULL)
+        return NULL;
     return (P->current)->song;
 }
