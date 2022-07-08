@@ -13,7 +13,7 @@ long long int maximum(long long int x,long long int y,long long int z)
 }
 int main()
 {
-    int N;
+    int N;  
     scanf("%d",&N);
     long long int ability[N];
     long long int p[N];
