@@ -40,7 +40,7 @@ int main()
         {
             long long int x,y;
             scanf("%lld %lld",&x,&y);
-            // printf("%d  -  (%lld,%lld)\n",i,x,y);
+            printf("%d  -  (%lld,%lld)\n",i,x,y);
             vx.push_back({x,{i,{x,y}}});
             vy.push_back({y,{i,{x,y}}});
         }
@@ -88,14 +88,14 @@ int main()
             }
         }
         
-        // for(int i=0;i<N;i++)
-        // {
-        //     printf("%d",i);
-        //     for(int j=0;j<vertex[i].size();j++)
-        //         printf("\t>(%lld,%d)",vertex[i][j].first,vertex[i][j].second);
-        //     printf("\n");
+        for(int i=0;i<N;i++)
+        {
+            printf("%d",i);
+            for(int j=0;j<vertex[i].size();j++)
+                printf("\t>(%lld,%d)",vertex[i][j].first,vertex[i][j].second);
+            printf("\n");
 
-        // }
+        }
 
         //PRIMS ALGORITHMS
         int visited[100005] ={};
@@ -138,8 +138,7 @@ int main()
                 }
             }
         }
-        printf("%lld\n",ans);
-
+        printf("%lld==============================================================\n",ans);
     }
     return 0;
 }
